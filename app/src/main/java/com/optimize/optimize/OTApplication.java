@@ -13,6 +13,6 @@ public class OTApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "wPzAhT9KqFmASIXkyF2od2h6cBuJUmpuB1UbtCC0", "QUItckEDHzCehcyzYW2on1s87UE7wi6q1exbBSsn");
+        Parse.initialize(this, "ZsFfXsCtRyddAgafqyaQYeCwlm0wpgSbGvi9pllv", "isCIVGhBxffrXr7ZIKsEGgogusoNPy7bFB39lmlj");
     }
 }

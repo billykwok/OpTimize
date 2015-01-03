@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
 import com.optimize.optimize.R;
+import com.optimize.optimize.calendar.CalendarEvent;
 import com.optimize.optimize.fragments.NavigationDrawerFragment;
 import com.parse.ParseException;
 import com.parse.ParseObject;
