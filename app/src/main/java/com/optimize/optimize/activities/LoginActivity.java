@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.optimize.optimize.R;
+import com.optimize.optimize.models.OTUser;
+import com.optimize.optimize.utilities.ToTo;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -56,22 +58,23 @@ public class LoginActivity extends OTActivity{
     @OnClick(R.id.btnRegister)
     public void registerUser() {
         if (isFormValid()) {
-            ParseUser parseUser = new ParseUser();
+            OTUser otUser = new OTUser();
             String email = actxtEmail.getText().toString();
             String username = etxtUsername.getText().toString();
             String password = etxtPassword.getText().toString();
-            parseUser.setEmail(email);
-            parseUser.setUsername(username);
-            parseUser.setPassword(password);
+            otUser.setEmail(email);
+            otUser.setUsername(username);
+            otUser.setPassword(password);
             blockForApi();
-            parseUser.signUpInBackground(new SignUpCallback() {
+            otUser.register(new SignUpCallback() {
                 @Override
                 public void done(ParseException e) {
                     if (e == null) {
                         dismissBlockForApi();
                         Log.d(TAG_OT, "hooray user create success");
                     } else {
-                        e.printStackTrace();
+                        dismissBlockForApi();
+                        ToTo.show(e.getMessage(), LoginActivity.this);
                     }
                 }
             });
