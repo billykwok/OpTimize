@@ -1,0 +1,29 @@
+OTUser {
+	ParseObject {
+		String userId ~ objectId;
+		String username;
+		String password;
+		String email;
+		JsonArray calenderEvents: JsonObject calenderEvent{
+			String title;
+			long begin;
+			long end;
+		}
+		JsonArray otEvents: String otEventId;
+	}
+}
+
+OTEvent {
+	ParseObject {
+		long otEventId ~ objectId;
+		String title;
+		String venue;
+		String hostId;
+		JsonArray participants: JsonObject participant {
+			String userId;
+			boolean accepted;
+		}
+	}
+}
+
+//TODO james please add the fields you need. 
