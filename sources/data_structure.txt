@@ -4,6 +4,7 @@ OTUser {
 		String username;
 		String password;
 		String email;
+		String calendarId;
 		JsonArray calenderEvents: JsonObject calenderEvent{
 			String title;
 			long begin;
