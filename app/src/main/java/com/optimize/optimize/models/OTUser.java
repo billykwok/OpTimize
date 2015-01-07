@@ -11,6 +11,10 @@ public class OTUser extends ParseUser{
     private List<CalendarEvent> eventList;
     private String calendarId;
 
+    public OTUser() {
+
+    }
+
     public OTUser(List<CalendarEvent> eventList, String id){
         this.eventList = eventList;
         this.calendarId = id;
@@ -22,5 +26,13 @@ public class OTUser extends ParseUser{
     @Override
     public String toString(){
         return calendarId + " " + eventList;
+    }
+
+    public void setEventList(List<CalendarEvent> eventList) {
+        this.eventList = eventList;
+    }
+
+    public void setCalendarId(String calendarId) {
+        this.calendarId = calendarId;
     }
 }
