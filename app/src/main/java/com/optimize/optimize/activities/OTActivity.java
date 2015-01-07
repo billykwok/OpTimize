@@ -5,6 +5,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
 import com.optimize.optimize.R;
+import com.optimize.optimize.calendar.TimeSlot;
+
+import java.util.List;
 
 /**
  * Created by samwalker on 1/1/15.
@@ -13,6 +16,7 @@ public class OTActivity extends ActionBarActivity {
 
     ProgressDialog pd;
     final String TAG_OT = "OTActivity";
+    private List<TimeSlot> possibleTimeSlots;
 
 
     public static final String TAG = "OTActivity";
@@ -40,5 +44,13 @@ public class OTActivity extends ActionBarActivity {
         } else {
             Log.e(TAG_OT, "dismiss called when pd is null");
         }
+    }
+
+    public List<TimeSlot> getPossibleTimeSlots() {
+        return possibleTimeSlots;
+    }
+
+    public void setPossibleTimeSlots(List<TimeSlot> possibleTimeSlots) {
+        this.possibleTimeSlots = possibleTimeSlots;
     }
 }
