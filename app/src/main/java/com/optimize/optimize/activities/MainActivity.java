@@ -47,6 +47,8 @@ public class MainActivity extends OTActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        CalendarEvent calendarEvent = new CalendarEvent("hihihi", 1000, 10000);
+        calendarEvent.toJSON();
     }
 
     @Override

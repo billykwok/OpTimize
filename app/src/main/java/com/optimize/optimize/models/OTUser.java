@@ -2,6 +2,9 @@ package com.optimize.optimize.models;
 
 import com.optimize.optimize.calendar.CalendarEvent;
 import com.parse.ParseUser;
+
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
@@ -10,8 +13,13 @@ import java.util.List;
 public class OTUser extends ParseUser{
     private List<CalendarEvent> eventList;
     private String calendarId;
+    private String[] otEvents;
 
     public OTUser() {
+
+    }
+
+    public OTUser (JSONObject otUserJson) {
 
     }
 

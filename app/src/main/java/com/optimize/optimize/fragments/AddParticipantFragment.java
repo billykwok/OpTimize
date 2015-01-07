@@ -12,7 +12,7 @@ import com.optimize.optimize.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AddParticipantFragment extends Fragment {
+public class AddParticipantFragment extends OTFragment {
 
 
     public AddParticipantFragment() {
