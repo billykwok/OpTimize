@@ -25,6 +25,18 @@ public class CalendarManager {
     public static final long HALF_HOUR_MILLIS = DateUtils.HOUR_IN_MILLIS / 2;
     public static final long ONE_DAY_MILLIS = DateUtils.DAY_IN_MILLIS;
 
+    /**
+     *
+     * @param userList userList with List of Calendar Event
+     * @param title Event Title
+     * @param duration time duration in milli second
+     * @param startTimeBoundary Start Time in a day (0-23)
+     * @param endTimeBoundary End Time in a day, end time must be larger than Start Time (0-23)
+     * @param comparisonStartTime Comparison Period Start Time in milli second
+     * @param comparisonEndTime Comparison Period End Time in milli second
+     * @param n Maximum number of possible Timeslot return.
+     * @return possible TimeSlots List
+     */
     public static List<TimeSlot> getOptimumTimeSlots(List<OTUser> userList,
                                                      String title,
                                                      long duration,
