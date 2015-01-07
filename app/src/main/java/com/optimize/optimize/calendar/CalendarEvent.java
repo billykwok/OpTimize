@@ -54,7 +54,7 @@ public class CalendarEvent {
         return getTitle() + " " + getBegin() + " " + getEnd();
     }
 
-    public JSONObject toJSON() {
+    public JSONObject toJson() {
         Gson g = new Gson();
         String jsonString = g.toJson(this);
         Log.d(CALENDAR_EVENT, jsonString);

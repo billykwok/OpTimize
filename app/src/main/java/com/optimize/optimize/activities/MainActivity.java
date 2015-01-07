@@ -16,9 +16,11 @@ import android.support.v4.widget.DrawerLayout;
 import com.optimize.optimize.R;
 import com.optimize.optimize.calendar.CalendarEvent;
 import com.optimize.optimize.fragments.NavigationDrawerFragment;
+import com.optimize.optimize.models.OTUser;
 import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.SaveCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends OTActivity
@@ -48,7 +50,17 @@ public class MainActivity extends OTActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         CalendarEvent calendarEvent = new CalendarEvent("hihihi", 1000, 10000);
-        calendarEvent.toJSON();
+        calendarEvent.toJson();
+        List<CalendarEvent> calendarEvents = new ArrayList<CalendarEvent>();
+        calendarEvents.add(calendarEvent);
+        OTUser ot = new OTUser();
+        ot.setUsername("affghj");
+        ot.setPassword("yuioop");
+        ot.setEmail("ghjkl@gmail.com");
+        ot.setEventList(calendarEvents);
+        List<CalendarEvent> calendarEventsTest = ot.getEventList();
+        CalendarEvent calendarEventTest = calendarEventsTest.get(0);
+        Log.d(TAG_OT, calendarEvent.toString());
     }
 
     @Override
