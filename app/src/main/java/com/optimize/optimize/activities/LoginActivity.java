@@ -1,8 +1,6 @@
 package com.optimize.optimize.activities;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.AutoText;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.optimize.optimize.R;
-import com.optimize.optimize.models.OTUser;
 import com.optimize.optimize.utilities.ToTo;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -58,7 +55,7 @@ public class LoginActivity extends OTActivity{
     @OnClick(R.id.btnRegister)
     public void registerUser() {
         if (isFormValid()) {
-            OTUser otUser = new OTUser();
+            ParseUser otUser = new ParseUser();
             String email = actxtEmail.getText().toString();
             String username = etxtUsername.getText().toString();
             String password = etxtPassword.getText().toString();
@@ -66,7 +63,7 @@ public class LoginActivity extends OTActivity{
             otUser.setUsername(username);
             otUser.setPassword(password);
             blockForApi();
-            otUser.register(new SignUpCallback() {
+            otUser.signUpInBackground(new SignUpCallback() {
                 @Override
                 public void done(ParseException e) {
                     if (e == null) {
