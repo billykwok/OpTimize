@@ -19,12 +19,11 @@ public class CalendarEvent {
     public CalendarEvent() {
     }
 
-    public CalendarEvent(String title, long begin, long end, boolean allDay) {
+    public CalendarEvent(String title, long begin, long end) {
         parseCalendarEvent = new ParseObject(CALENDAR_EVENT);
         setTitle(title);
         setBegin(begin);
         setEnd(end);
-        setAllDay(allDay);
     }
 
     public String getTitle() {
@@ -48,13 +47,6 @@ public class CalendarEvent {
         this.end = end;
         parseCalendarEvent.put("end", end);
     }
-    public boolean isAllDay() {
-        return allDay;
-    }
-    public void setAllDay(boolean allDay) {
-        this.allDay = allDay;
-        parseCalendarEvent.put("allDay", allDay);
-    }
 
     public void save() {
         parseCalendarEvent.saveInBackground();
@@ -69,7 +61,7 @@ public class CalendarEvent {
 
     @Override
     public String toString(){
-        return getTitle() + " " + getBegin() + " " + getEnd() + " " + isAllDay();
+        return getTitle() + " " + getBegin() + " " + getEnd();
     }
 
 }

@@ -17,7 +17,7 @@ import android.content.Context;
 public class CalendarService{
 
     public static CalendarEvent createEvent(String title, int startYear, int startMonth, int startDay, int startHour, int startMin,
-                                              int endYear, int endMonth, int endDay, int endHour, int endMin, boolean recur){
+                                              int endYear, int endMonth, int endDay, int endHour, int endMin){
         long startMillis = 0;
         long endMillis = 0;
         Calendar beginTime = Calendar.getInstance();
@@ -27,11 +27,11 @@ public class CalendarService{
         endTime.set(endYear, endMonth, endDay, endHour, endMin);
         endMillis = endTime.getTimeInMillis();
 
-        CalendarEvent newEvent = new CalendarEvent(title, startMillis, endMillis, recur);
+        CalendarEvent newEvent = new CalendarEvent(title, startMillis, endMillis);
         return newEvent;
     }
 
-    public static void addEvent(Context context, CalendarEvent event, String id){
+    public static void exportEvent(Context context, CalendarEvent event, String id){
         ContentResolver cr = context.getContentResolver();
         ContentValues values = new ContentValues();
         TimeZone timeZone = TimeZone.getDefault();
@@ -58,12 +58,11 @@ public class CalendarService{
         return id;
     }
 
-    public static void processEventList(Context context, int days, int hours, String id, List<CalendarEvent> eventList) {
+    public static void exportEventList(Context context, int days, int hours, String id, List<CalendarEvent> eventList) {
         String[] eventProjection = new String[]{
                 CalendarContract.Events.TITLE,
                 CalendarContract.Instances.BEGIN,
                 CalendarContract.Instances.END,
-                CalendarContract.Events.ALL_DAY
         };
 
         Cursor eventCursor = null;
@@ -72,7 +71,7 @@ public class CalendarService{
 
         Uri.Builder eventUriBuilder = uri.buildUpon();
         long now = new Date().getTime();
-        long beforeNow = now - (DateUtils.DAY_IN_MILLIS * days) - (DateUtils.HOUR_IN_MILLIS * hours);
+        long beforeNow = now;
         long afterNow = now + (DateUtils.DAY_IN_MILLIS * days) + (DateUtils.HOUR_IN_MILLIS * hours);
 
         // create the time span based on the inputs
@@ -91,7 +90,7 @@ public class CalendarService{
 
     private static CalendarEvent loadEvent(Cursor csr) {
 //        Log.i("Return", csr.getString(0) + " " + csr.getLong(1) + " " + csr.getLong(2));
-        return new CalendarEvent(csr.getString(0), csr.getLong(1), csr.getLong(2), !csr.getString(3).equals("0"));
+        return new CalendarEvent(csr.getString(0), csr.getLong(1), csr.getLong(2));
     }
 
     public static void printArrayList(List<CalendarEvent> eventList){
