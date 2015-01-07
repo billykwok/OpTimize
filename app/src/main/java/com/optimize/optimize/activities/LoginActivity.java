@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.optimize.optimize.R;
+import com.optimize.optimize.models.OTUser;
 import com.optimize.optimize.utilities.ToTo;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -55,7 +56,7 @@ public class LoginActivity extends OTActivity{
     @OnClick(R.id.btnRegister)
     public void registerUser() {
         if (isFormValid()) {
-            ParseUser otUser = new ParseUser();
+            OTUser otUser = new OTUser();
             String email = actxtEmail.getText().toString();
             String username = etxtUsername.getText().toString();
             String password = etxtPassword.getText().toString();
