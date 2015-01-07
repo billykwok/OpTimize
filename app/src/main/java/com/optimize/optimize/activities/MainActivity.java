@@ -18,6 +18,7 @@ import com.optimize.optimize.calendar.CalendarEvent;
 import com.optimize.optimize.fragments.NavigationDrawerFragment;
 import com.optimize.optimize.models.OTUser;
 import com.parse.ParseException;
+import com.parse.SignUpCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,10 +55,20 @@ public class MainActivity extends OTActivity
         List<CalendarEvent> calendarEvents = new ArrayList<CalendarEvent>();
         calendarEvents.add(calendarEvent);
         OTUser ot = new OTUser();
-        ot.setUsername("affghj");
-        ot.setPassword("yuioop");
-        ot.setEmail("ghjkl@gmail.com");
+        ot.setUsername("affghjdrtdfytghiuhnihgiughiuvgyuhjguyg");
+        ot.setPassword("yuioophfnioi");
+        ot.setEmail("ghjklgiuhodfhoihhoihsaoi@gmail.com");
         ot.setEventList(calendarEvents);
+        ot.signUpInBackground(new SignUpCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.d(TAG, "horray, sign up success");
+                } else {
+                    e.printStackTrace();
+                }
+            }
+        });
         List<CalendarEvent> calendarEventsTest = ot.getEventList();
         CalendarEvent calendarEventTest = calendarEventsTest.get(0);
         Log.d(TAG_OT, calendarEvent.toString());
