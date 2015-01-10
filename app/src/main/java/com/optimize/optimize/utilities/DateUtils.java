@@ -1,5 +1,6 @@
 package com.optimize.optimize.utilities;
 
+import android.text.format.DateFormat;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -10,6 +11,10 @@ import java.util.Date;
  * Created by samwalker on 22/12/14.
  */
 public class DateUtils {
+
+    public static String convertDate(long dateInMilliseconds,String dateFormat) {
+        return DateFormat.format(dateFormat, dateInMilliseconds).toString();
+    }
 //    final static String TAG = "DateUtils";
 //    public DateUtils(){
 //
