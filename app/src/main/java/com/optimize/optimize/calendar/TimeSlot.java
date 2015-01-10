@@ -1,5 +1,7 @@
 package com.optimize.optimize.calendar;
 
+import com.optimize.optimize.utilities.DateUtils;
+
 /**
  * Created by james on 5/1/15.`
  */
@@ -17,9 +19,15 @@ public class TimeSlot implements Comparable{
 
     public int getNumOfConflict(){ return numOfConflict;}
 
+    public long getStart(){ return start;}
+
+    public long getEnd(){return end;};
+
     @Override
     public String toString(){
-        return start + " " + end + " " + numOfConflict;
+        return "From " + DateUtils.convertDate(start, "dd/MM/yyyy hh:mm")+
+                " To " + DateUtils.convertDate(end, "dd/MM/yyyy hh:mm") +
+                " Conflict: " + numOfConflict;
     }
 
     @Override
