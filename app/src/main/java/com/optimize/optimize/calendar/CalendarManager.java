@@ -2,16 +2,23 @@ package com.optimize.optimize.calendar;
 
 import android.text.format.DateUtils;
 
+import com.optimize.optimize.WithInType;
 import com.optimize.optimize.models.OTUser;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by james on 7/1/15.
  */
 public class CalendarManager {
+
+    private int startHour;
+    private int endHour;
+    private WithInType withIn;
+
     private static CalendarManager ourInstance = new CalendarManager();
 
     public static CalendarManager getInstance() {
@@ -81,5 +88,39 @@ public class CalendarManager {
             possibleEventTime.add(possibleTimeSlots.get(i));
         }
         return possibleEventTime;
+    }
+
+    public CalendarManager(int startHour, int endHour) {
+        this.startHour = startHour;
+        this.endHour = endHour;
+    }
+
+    public void setWithIn(WithInType withIn) {
+        this.withIn = withIn;
+    }
+
+    public long hoursInMilliSec(int hour) {
+        return hour*DateUtils.HOUR_IN_MILLIS;
+    }
+
+    public long getEndHourInMilliSec() {
+        return hoursInMilliSec(endHour);
+    }
+
+    public long getStartHourInMilliSec() {
+        return hoursInMilliSec(startHour);
+    }
+
+    public long getWitinInMilliSec() {
+        switch (withIn) {
+            case Day:
+                return new Date().getTime() + 1 * DateUtils.DAY_IN_MILLIS;
+            case Week:
+                return new Date().getTime() + 7 * DateUtils.DAY_IN_MILLIS;
+            case Month:
+                return new Date().getTime() + 30 * DateUtils.DAY_IN_MILLIS;
+        }
+
+        return -1;
     }
 }
