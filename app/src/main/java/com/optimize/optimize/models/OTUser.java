@@ -21,18 +21,30 @@ import java.util.List;
 public class OTUser extends ParseUser{
     private List<CalendarEvent> eventList;
     private String calendarId;
-    private List<String> otEvents;
+    private List<String> otEventsId;
 
     final String TAG = "OTUser";
 
     public OTUser() {
         eventList = new ArrayList<CalendarEvent>();
         calendarId = "";
-        otEvents = new ArrayList<String>();
+        otEventsId = new ArrayList<String>();
     }
 
     public OTUser (JSONObject otUserJson) {
+    }
 
+    public List<String> getOtEventsId() {
+        return otEventsId;
+    }
+
+    public List<String> getOTEventsIdFromJSON() {
+        return otEventsId;
+    }
+
+
+    public void setOtEventsId(List<String> otEventsId) {
+        this.otEventsId = otEventsId;
     }
 
     public OTUser(List<CalendarEvent> eventList, String id){
