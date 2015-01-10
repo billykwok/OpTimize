@@ -39,12 +39,25 @@ public class OTUser extends ParseUser{
     }
 
     public List<String> getOTEventsIdFromJSON() {
+        JSONArray otEventIdsJson = getJSONArray("otEventsId");
+        List<String> otEventIdsTemp = new ArrayList<String>();
+        if (otEventIdsJson != null) {
+            for (int i = 0; i < otEventIdsJson.length(); i++ ) {
+                String otEventId = otEventIdsJson.optString(i);
+                otEventIdsTemp.add(otEventId);
+            }
+        } else {
+            Log.d(TAG, "otEventIdsJson is null");
+        }
+        otEventsId = otEventIdsTemp;
         return otEventsId;
     }
 
 
     public void setOtEventsId(List<String> otEventsId) {
         this.otEventsId = otEventsId;
+        JSONArray eventsIdJSON = new JSONArray(otEventsId);
+        put("otEventsId", otEventsId);
     }
 
     public OTUser(List<CalendarEvent> eventList, String id){
@@ -77,6 +90,8 @@ public class OTUser extends ParseUser{
         return calendarEvents;
     }
 
+
+
     @Override
     public String toString(){
         return calendarId + " " + eventList;
@@ -102,5 +117,6 @@ public class OTUser extends ParseUser{
     public void setCalendarId(String calendarId) {
         this.calendarId = calendarId;
     }
+
 
 }
