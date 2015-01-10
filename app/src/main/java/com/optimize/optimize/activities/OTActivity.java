@@ -1,11 +1,14 @@
 package com.optimize.optimize.activities;
 
 import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
 import com.optimize.optimize.R;
 import com.optimize.optimize.calendar.TimeSlot;
+import com.optimize.optimize.models.Participant;
 
 import java.util.List;
 
@@ -17,7 +20,7 @@ public class OTActivity extends ActionBarActivity {
     ProgressDialog pd;
     final String TAG_OT = "OTActivity";
     private List<TimeSlot> possibleTimeSlots;
-
+    private List<Participant> participants;
 
     public static final String TAG = "OTActivity";
 
@@ -52,5 +55,13 @@ public class OTActivity extends ActionBarActivity {
 
     public void setPossibleTimeSlots(List<TimeSlot> possibleTimeSlots) {
         this.possibleTimeSlots = possibleTimeSlots;
+    }
+
+    public List<Participant> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<Participant> participants) {
+        this.participants = participants;
     }
 }
