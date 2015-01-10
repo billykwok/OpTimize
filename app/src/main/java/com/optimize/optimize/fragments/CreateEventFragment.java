@@ -43,7 +43,7 @@ public class CreateEventFragment extends OTFragment implements OnClickListener{
         View scrollView = inflater.inflate(R.layout.fragment_create_event, container, false);
         LinearLayout linearLayout = (LinearLayout) scrollView.findViewById(R.id.create_event_form_layout);
 
-        List<TimeSlot> possibleTimeSlot = null;
+        List<TimeSlot> possibleTimeSlot = ot().getPossibleTimeSlots();
 
         Spinner timeSlotSpinner = (Spinner) linearLayout.findViewById(R.id.TimeSlotSpinner);
 
