@@ -27,6 +27,8 @@ public class OTEvent extends ParseObject{
     private String description;
     private List<Participant> participants;
 
+    public OTEvent(){}
+
     public OTEvent(String title, long begin, long end, String venue, String description) {
         setTitle(title);
         setBegin(begin);
