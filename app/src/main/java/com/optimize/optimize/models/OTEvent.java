@@ -27,6 +27,14 @@ public class OTEvent extends ParseObject{
     private String description;
     private List<Participant> participants;
 
+    public OTEvent(String title, long begin, long end, String venue, String description) {
+        setTitle(title);
+        setBegin(begin);
+        setEnd(end);
+        setDescription(description);
+        setVenue(venue);
+    }
+
     public String getTitle() {
         return getString("title");
     }
@@ -128,7 +136,4 @@ public class OTEvent extends ParseObject{
         put("participants", participantsJSON);
     }
 
-    public void exportToCalendar() {
-        //TODO James please implement it.
-    }
 }

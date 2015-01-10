@@ -2,8 +2,10 @@ package com.optimize.optimize.fragments;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import com.optimize.optimize.R;
+import com.optimize.optimize.activities.MainActivity;
 import com.optimize.optimize.activities.OTActivity;
 import com.optimize.optimize.calendar.CalendarEvent;
 import com.optimize.optimize.calendar.CalendarService;
@@ -58,23 +61,34 @@ public class CreateEventFragment extends OTFragment implements OnClickListener{
 
     @Override
     public void onClick(View v) {
-        EditText titleField = (EditText) getView().findViewById(R.id.EventTitle);
-        String title = titleField.getText().toString();
+        switch (v.getId()) {
+            case R.id.createEventButton:
+                EditText titleField = (EditText) getView().findViewById(R.id.EventTitle);
+                String title = titleField.getText().toString();
 
-        EditText locationField = (EditText) getView().findViewById(R.id.EventLocation);
-        String location = locationField.getText().toString();
+                EditText locationField = (EditText) getView().findViewById(R.id.EventLocation);
+                String location = locationField.getText().toString();
 
-        EditText descriptionField = (EditText) getView().findViewById(R.id.EventDescription);
-        String description = descriptionField.getText().toString();
+                EditText descriptionField = (EditText) getView().findViewById(R.id.EventDescription);
+                String description = descriptionField.getText().toString();
 
-        Spinner timeSpinner = (Spinner) getView().findViewById(R.id.TimeSlotSpinner);
-        String time = timeSpinner.getSelectedItem().toString();
-        TimeSlot timeSlot = (TimeSlot) timeSpinner.getSelectedItem();
-        Log.i("Results", "Title: " + title + "Location: " + location + "Des: " +
-                description + "Time: " + time);
+                Spinner timeSpinner = (Spinner) getView().findViewById(R.id.TimeSlotSpinner);
+                String time = timeSpinner.getSelectedItem().toString();
+                TimeSlot timeSlot = (TimeSlot) timeSpinner.getSelectedItem();
+                Log.i("Results", "Title: " + title + "Location: " + location + "Des: " +
+                        description + "Time: " + time);
 
-        CalendarService.exportEvent(getActivity().getBaseContext(), new CalendarEvent(title, timeSlot.getStart(), timeSlot.getEnd()), CalendarService.getCalendarId(getActivity().getBaseContext()));
+                CalendarService.exportEvent(getActivity().getBaseContext(), new CalendarEvent(title, timeSlot.getStart(), timeSlot.getEnd()), CalendarService.getCalendarId(getActivity().getBaseContext()));
+                Intent i = new Intent(getActivity().getBaseContext(), MainActivity.class);
+                startActivity(i);
+                break;
+
+                //save
+
+
+
+            case R.id.cancelButton:
+                getFragmentManager().popBackStack();
+        }
     }
-
-
 }

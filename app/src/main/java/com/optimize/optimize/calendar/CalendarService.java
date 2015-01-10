@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.TimeZone;
 import android.content.Context;
 
+import com.optimize.optimize.models.OTEvent;
+
 public class CalendarService{
 
     public static CalendarEvent createEvent(String title, int startYear, int startMonth, int startDay, int startHour, int startMin,
@@ -39,6 +41,7 @@ public class CalendarService{
         values.put(CalendarContract.Events.DTEND, event.getEnd());
         values.put(CalendarContract.Events.EVENT_TIMEZONE, timeZone.getID());
         values.put(CalendarContract.Events.TITLE, event.getTitle());
+//        values.put(CalendarContract.Events.EVENT_LOCATION, event.getVenue());
         values.put(CalendarContract.Events.DESCRIPTION, "description here");
         values.put(CalendarContract.Events.CALENDAR_ID, id);
         Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values); //in case need to retrieve any info
