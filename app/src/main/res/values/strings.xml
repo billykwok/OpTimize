@@ -15,6 +15,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">Sign in/ Register</string>
 
+    <string name="starting_from">Starting From</string>
+    <string name="end_time">End Time</string>
+    <string name="find">Find</string>
     <string name="api_loading">Loading...Please wait</string>
 
 
