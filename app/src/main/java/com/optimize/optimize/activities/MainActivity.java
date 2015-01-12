@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
+import com.optimize.optimize.EventTimeType;
 import com.optimize.optimize.R;
 import com.optimize.optimize.calendar.CalendarEvent;
 import com.optimize.optimize.fragments.NavigationDrawerFragment;
@@ -50,28 +51,7 @@ public class MainActivity extends OTActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-        CalendarEvent calendarEvent = new CalendarEvent("hihihi", 1000, 10000);
-        calendarEvent.toJson();
-        List<CalendarEvent> calendarEvents = new ArrayList<CalendarEvent>();
-        calendarEvents.add(calendarEvent);
-        OTUser ot = new OTUser();
-        ot.setUsername("affghjdrtdfytghiuhnihgiughiuvgyuhjguyg");
-        ot.setPassword("yuioophfnioi");
-        ot.setEmail("ghjklgiuhodfhoihhoihsaoi@gmail.com");
-        ot.setEventList(calendarEvents);
-        ot.signUpInBackground(new SignUpCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    Log.d(TAG, "horray, sign up success");
-                } else {
-                    e.printStackTrace();
-                }
-            }
-        });
-        List<CalendarEvent> calendarEventsTest = ot.getEventList();
-        CalendarEvent calendarEventTest = calendarEventsTest.get(0);
-        Log.d(TAG_OT, calendarEvent.toString());
+        showTimePickerDialog(EventTimeType.End);
     }
 
     @Override
