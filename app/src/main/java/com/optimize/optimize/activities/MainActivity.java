@@ -16,6 +16,7 @@ import android.support.v4.widget.DrawerLayout;
 import com.optimize.optimize.EventTimeType;
 import com.optimize.optimize.R;
 import com.optimize.optimize.calendar.CalendarEvent;
+import com.optimize.optimize.fragments.AddParticipantFragment;
 import com.optimize.optimize.fragments.NavigationDrawerFragment;
 import com.optimize.optimize.models.OTEvent;
 import com.optimize.optimize.models.OTUser;
@@ -53,20 +54,6 @@ public class MainActivity extends OTActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-        showTimePickerDialog(EventTimeType.End);
-
-        OTEvent otEvent = new OTEvent();
-        otEvent.setBegin(System.currentTimeMillis());
-        otEvent.setEnd(System.currentTimeMillis());
-
-        List<Participant> participants = new ArrayList<>();
-        Participant participant = new Participant();
-        participant.setAccepted(false);
-        participant.setUserId("edfghyjuhjilhilh");
-        participants.add(participant);
-        participants.add(participant);
-        otEvent.setParticipants(participants);
-        otEvent.saveInBackground();
     }
 
     @Override
@@ -74,7 +61,7 @@ public class MainActivity extends OTActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, new AddParticipantFragment())
                 .commit();
     }
 

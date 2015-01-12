@@ -9,6 +9,7 @@ import android.text.format.DateFormat;
 import android.widget.TimePicker;
 
 import com.optimize.optimize.EventTimeType;
+import com.optimize.optimize.calendar.CalendarManager;
 import com.optimize.optimize.utilities.ToTo;
 
 import java.util.Calendar;
@@ -36,10 +37,12 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         switch (eventTimeType) {
             case Start:
-                ToTo.show("Start: "+String.valueOf(hourOfDay) + " "+ String.valueOf(minute), getActivity());
+//                ToTo.show("Start: "+String.valueOf(hourOfDay) + " "+ String.valueOf(minute), getActivity());
+                CalendarManager.getInstance().setStartHour((int)(hourOfDay+0.5));
                 return;
             case End:
-                ToTo.show("End: "+String.valueOf(hourOfDay) + " "+ String.valueOf(minute), getActivity());
+//                ToTo.show("End: "+String.valueOf(hourOfDay) + " "+ String.valueOf(minute), getActivity());
+                CalendarManager.getInstance().setEndHour((int)(hourOfDay+0.5));
                 return;
         }
 
