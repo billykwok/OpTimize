@@ -14,6 +14,14 @@
     <string name="action_example">Example action</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">Sign in/ Register</string>
+
+    <string name="starting_from">Starting From</string>
+    <string name="end_time">End Time</string>
+    <string name="find">Find</string>
+    <string name="within_day">Within a day</string>
+    <string name="within_week">Within a week</string>
+    <string name="within_month">Within a month</string>
+
     <string name="api_loading">Loading...Please wait</string>
     <string name="title_activity_test_create_fragment">TestCreateFragment</string>
 
