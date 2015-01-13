@@ -23,7 +23,12 @@ import com.optimize.optimize.activities.OTActivity;
 import com.optimize.optimize.calendar.CalendarEvent;
 import com.optimize.optimize.calendar.CalendarService;
 import com.optimize.optimize.calendar.TimeSlot;
+import com.optimize.optimize.models.OTEvent;
+import com.optimize.optimize.utilities.ToTo;
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,7 +48,14 @@ public class CreateEventFragment extends OTFragment implements OnClickListener{
         View scrollView = inflater.inflate(R.layout.fragment_create_event, container, false);
         LinearLayout linearLayout = (LinearLayout) scrollView.findViewById(R.id.create_event_form_layout);
 
-        List<TimeSlot> possibleTimeSlot = ot().getPossibleTimeSlots();
+        List<TimeSlot> possibleTimeSlot = new ArrayList<TimeSlot>();
+
+        //Test case
+        List<CalendarEvent> ce = new ArrayList<CalendarEvent>();
+        CalendarService.updateEventList(getActivity().getBaseContext(),CalendarService.getCalendarId(getActivity().getBaseContext()),ce);
+        possibleTimeSlot.add(new TimeSlot(ce.get(0).getBegin(), ce.get(0).getEnd()));
+
+//        List<TimeSlot> possibleTimeSlot = ot().getPossibleTimeSlots();
 
         Spinner timeSlotSpinner = (Spinner) linearLayout.findViewById(R.id.TimeSlotSpinner);
 
@@ -75,20 +87,35 @@ public class CreateEventFragment extends OTFragment implements OnClickListener{
                 Spinner timeSpinner = (Spinner) getView().findViewById(R.id.TimeSlotSpinner);
                 String time = timeSpinner.getSelectedItem().toString();
                 TimeSlot timeSlot = (TimeSlot) timeSpinner.getSelectedItem();
+
                 Log.i("Results", "Title: " + title + "Location: " + location + "Des: " +
                         description + "Time: " + time);
 
-                CalendarService.exportEvent(getActivity().getBaseContext(), new CalendarEvent(title, timeSlot.getStart(), timeSlot.getEnd()), CalendarService.getCalendarId(getActivity().getBaseContext()));
+                OTEvent otEvent = new OTEvent(title, timeSlot.getStart(), timeSlot.getEnd(), description, location);
+                otEvent.saveInBackground();
+
+                CalendarService.exportEvent(getActivity().getBaseContext(), new CalendarEvent(title,
+                                            timeSlot.getStart(), timeSlot.getEnd()), location, description,
+                                            CalendarService.getCalendarId(getActivity().getBaseContext()));
+
+                        /*new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            ToTo.show("save success", ot());
+                        } else {
+                            e.printStackTrace();
+                        }
+                    }
+                });*/
+
                 Intent i = new Intent(getActivity().getBaseContext(), MainActivity.class);
                 startActivity(i);
                 break;
 
-                //save
-
-
-
             case R.id.cancelButton:
                 getFragmentManager().popBackStack();
+                break;
         }
     }
 }

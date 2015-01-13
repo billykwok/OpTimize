@@ -33,7 +33,8 @@ public class CalendarService{
         return newEvent;
     }
 
-    public static void exportEvent(Context context, CalendarEvent event, String id){
+    public static void exportEvent(Context context, CalendarEvent event, String description, String location, String id){
+        Log.i("Enter Export", "Success with id: "+id);
         ContentResolver cr = context.getContentResolver();
         ContentValues values = new ContentValues();
         TimeZone timeZone = TimeZone.getDefault();
@@ -41,8 +42,8 @@ public class CalendarService{
         values.put(CalendarContract.Events.DTEND, event.getEnd());
         values.put(CalendarContract.Events.EVENT_TIMEZONE, timeZone.getID());
         values.put(CalendarContract.Events.TITLE, event.getTitle());
-//        values.put(CalendarContract.Events.EVENT_LOCATION, event.getVenue());
-        values.put(CalendarContract.Events.DESCRIPTION, "description here");
+        values.put(CalendarContract.Events.EVENT_LOCATION, location);
+        values.put(CalendarContract.Events.DESCRIPTION, description);
         values.put(CalendarContract.Events.CALENDAR_ID, id);
         Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values); //in case need to retrieve any info
     }
@@ -61,7 +62,8 @@ public class CalendarService{
         return id;
     }
 
-    public static void exportEventList(Context context, int days, int hours, String id, List<CalendarEvent> eventList) {
+    public static void updateEventList(Context context, String id, List<CalendarEvent> eventList) {
+
         String[] eventProjection = new String[]{
                 CalendarContract.Events.TITLE,
                 CalendarContract.Instances.BEGIN,
@@ -75,7 +77,7 @@ public class CalendarService{
         Uri.Builder eventUriBuilder = uri.buildUpon();
         long now = new Date().getTime();
         long beforeNow = now;
-        long afterNow = now + (DateUtils.DAY_IN_MILLIS * days) + (DateUtils.HOUR_IN_MILLIS * hours);
+        long afterNow = now + (DateUtils.DAY_IN_MILLIS * 60) + (DateUtils.HOUR_IN_MILLIS * 0); //read 60 days' events
 
         // create the time span based on the inputs
         ContentUris.appendId(eventUriBuilder, beforeNow);
