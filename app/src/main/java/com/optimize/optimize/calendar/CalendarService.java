@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.provider.CalendarContract;
 import android.text.format.DateUtils;
 import android.util.Log;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import android.content.ContentValues;
@@ -48,6 +50,20 @@ public class CalendarService{
         Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values); //in case need to retrieve any info
     }
 
+    public static List<String> getCalendarIdList(Context context) {
+        String[] projection = new String[]{CalendarContract.Calendars._ID};
+        Cursor cursor = null;
+        ContentResolver cr = context.getContentResolver();
+        Uri uri = CalendarContract.Calendars.CONTENT_URI;
+        cursor = cr.query(uri, projection, null, null, null);
+        List<String> ids = new ArrayList<String>();
+        while (cursor.moveToNext()) {
+            ids.add(cursor.getString(0));
+        }
+        cursor.close();
+        return ids;
+    }
+
     public static String getCalendarId(Context context){
         String[] projection = new String[]{CalendarContract.Calendars._ID};
         Cursor cursor = null;
@@ -62,7 +78,7 @@ public class CalendarService{
         return id;
     }
 
-    public static void updateEventList(Context context, String id, List<CalendarEvent> eventList) {
+    public static List<CalendarEvent> getEventList(Context context, List<String> ids) {
 
         String[] eventProjection = new String[]{
                 CalendarContract.Events.TITLE,
@@ -83,13 +99,24 @@ public class CalendarService{
         ContentUris.appendId(eventUriBuilder, beforeNow);
         ContentUris.appendId(eventUriBuilder,afterNow);
 
-        eventCursor = cr.query(eventUriBuilder.build(), eventProjection, "(Events.CALENDAR_ID=" + id + ")", null, "startDay ASC, startMinute ASC");
+        List<CalendarEvent> eventList = new ArrayList<CalendarEvent>();
 
-        while (eventCursor.moveToNext())
-        {
-            CalendarEvent ce = loadEvent(eventCursor);
-            eventList.add(ce);
+        for(int i = 0; i < ids.size(); ++i) {
+            eventCursor = cr.query(eventUriBuilder.build(), eventProjection, "(Events.CALENDAR_ID=" + ids.get(i) + ")", null, "startDay ASC, startMinute ASC");
+
+            while (eventCursor.moveToNext()) {
+
+                CalendarEvent ce = loadEvent(eventCursor);
+                eventList.add(ce);
+            }
         }
+
+        if(eventList.size() == 0)
+            Log.i("Event List","Empty Event List");
+        else
+            Log.i("Event List","Not Empty Event List");
+
+        return eventList;
     }
 
 

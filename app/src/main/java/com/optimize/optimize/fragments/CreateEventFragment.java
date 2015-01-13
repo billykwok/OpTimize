@@ -52,7 +52,7 @@ public class CreateEventFragment extends OTFragment implements OnClickListener{
 
         //Test case
         List<CalendarEvent> ce = new ArrayList<CalendarEvent>();
-        CalendarService.updateEventList(getActivity().getBaseContext(),CalendarService.getCalendarId(getActivity().getBaseContext()),ce);
+        ce = CalendarService.getEventList(getActivity().getBaseContext(),CalendarService.getCalendarIdList(getActivity().getBaseContext()));
         possibleTimeSlot.add(new TimeSlot(ce.get(0).getBegin(), ce.get(0).getEnd()));
 
 //        List<TimeSlot> possibleTimeSlot = ot().getPossibleTimeSlots();
