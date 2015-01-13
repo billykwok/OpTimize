@@ -9,10 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.optimize.optimize.R;
-import com.optimize.optimize.models.OTUser;
+import com.optimize.optimize.models.OTUserService;
 import com.optimize.optimize.utilities.ToTo;
 import com.parse.ParseException;
-import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 import butterknife.ButterKnife;
@@ -56,15 +55,15 @@ public class LoginActivity extends OTActivity{
     @OnClick(R.id.btnRegister)
     public void registerUser() {
         if (isFormValid()) {
-            OTUser otUser = new OTUser();
+            OTUserService otUserService = new OTUserService();
             String email = actxtEmail.getText().toString();
             String username = etxtUsername.getText().toString();
             String password = etxtPassword.getText().toString();
-            otUser.setEmail(email);
-            otUser.setUsername(username);
-            otUser.setPassword(password);
+            otUserService.setEmail(email);
+            otUserService.setUsername(username);
+            otUserService.setPassword(password);
             blockForApi();
-            otUser.signUpInBackground(new SignUpCallback() {
+            otUserService.signUpInBackground(new SignUpCallback() {
                 @Override
                 public void done(ParseException e) {
                     if (e == null) {

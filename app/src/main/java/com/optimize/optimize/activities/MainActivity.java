@@ -5,7 +5,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,19 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
-import com.optimize.optimize.EventTimeType;
 import com.optimize.optimize.R;
-import com.optimize.optimize.calendar.CalendarEvent;
 import com.optimize.optimize.fragments.AddParticipantFragment;
 import com.optimize.optimize.fragments.NavigationDrawerFragment;
-import com.optimize.optimize.models.OTEvent;
-import com.optimize.optimize.models.OTUser;
-import com.optimize.optimize.models.Participant;
-import com.parse.ParseException;
-import com.parse.SignUpCallback;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends OTActivity
