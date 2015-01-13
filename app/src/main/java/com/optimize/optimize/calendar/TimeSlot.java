@@ -62,14 +62,14 @@ public class TimeSlot implements Comparable {
         private int endHour;
         private WithInType withIn;
         private int duration;
-        private List<OTUserService> users;
+        private List<ParseUser> users;
 
         public Builder setDuration(int duration) {
             this.duration = duration;
             return this;
         }
 
-        public Builder setUsers(List<OTUserService> users) {
+        public Builder setUsers(List<ParseUser> users) {
             this.users = users;
             return this;
         }
@@ -130,7 +130,7 @@ public class TimeSlot implements Comparable {
          * @param n                   Maximum number of possible Timeslot return.
          * @return possible TimeSlots List
          */
-        public List<TimeSlot> getOptimumTimeSlots(List<OTUserService> userList,
+        public List<TimeSlot> getOptimumTimeSlots(List<ParseUser> userList,
                                                   String title,
                                                   long duration,
                                                   int startTimeBoundary,
@@ -151,7 +151,7 @@ public class TimeSlot implements Comparable {
             // Search for numOfConflict for each events
             for (TimeSlot timeSlot : possibleTimeSlots) {
                 for (ParseUser user : userList) {
-                    for (CalendarEvent event : user.getEventList()) {
+                    for (CalendarEvent event : OTUserService.getEvents(user)) {
                         if ((event.getBegin() >= timeSlot.start && event.getBegin() <= timeSlot.end) ||
                                 event.getEnd() >= timeSlot.start && event.getEnd() <= timeSlot.end) {
                             timeSlot.numOfConflict++;
