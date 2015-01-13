@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.optimize.optimize.calendar.CalendarEvent;
 import com.parse.ParseClassName;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import org.json.JSONArray;
@@ -17,29 +18,25 @@ import java.util.List;
 /**
  * Created by samwalker on 7/1/15.
  */
-@ParseClassName("OTUser")
-public class OTUser extends ParseUser{
+public class OTUserService {
     private List<CalendarEvent> eventList;
     private String calendarId;
     private List<String> otEventsId;
 
-    final String TAG = "OTUser";
+    final String TAG = "OTUserService";
 
-    public OTUser() {
+    public OTUserService() {
         eventList = new ArrayList<CalendarEvent>();
         calendarId = "";
         otEventsId = new ArrayList<String>();
-    }
-
-    public OTUser (JSONObject otUserJson) {
     }
 
     public List<String> getOtEventsId() {
         return otEventsId;
     }
 
-    public List<String> getOTEventsIdFromJSON() {
-        JSONArray otEventIdsJson = getJSONArray("otEventsId");
+    public List<String> getOTEventsIdFromJSON(ParseUser parseUser) {
+        JSONArray otEventIdsJson = parseUser.getJSONArray("otEventsId");
         List<String> otEventIdsTemp = new ArrayList<String>();
         if (otEventIdsJson != null) {
             for (int i = 0; i < otEventIdsJson.length(); i++ ) {
@@ -54,27 +51,23 @@ public class OTUser extends ParseUser{
     }
 
 
-    public void setOtEventsId(List<String> otEventsId) {
+    public void setOtEventsId(List<String> otEventsId, ParseUser parseUser) {
         this.otEventsId = otEventsId;
         JSONArray eventsIdJSON = new JSONArray(otEventsId);
-        put("otEventsId", otEventsId);
+        parseUser.put("otEventsId", otEventsId);
     }
 
-    public OTUser(List<CalendarEvent> eventList, String id){
-        this.eventList = eventList;
-        this.calendarId = id;
-    }
 
     public String getCalendarId(){return calendarId;}
-    public List<CalendarEvent> getEventList(){
+    public List<CalendarEvent> getEventList(ParseUser parseUser){
         if (eventList == null) {
-            getEventsFromJSON();
+            getEventsFromJSON(parseUser);
         }
         return eventList;
     }
 
-    public List<CalendarEvent> getEventsFromJSON() {
-        JSONArray calendarEventJsons = (JSONArray) get("calendarEvents");
+    public List<CalendarEvent> getEventsFromJSON(ParseUser parseUser) {
+        JSONArray calendarEventJsons = (JSONArray) parseUser.get("calendarEvents");
         List<CalendarEvent> calendarEvents = new ArrayList<CalendarEvent>();
         if (calendarEventJsons != null) {
             for (int i = 0; i < calendarEventJsons.length(); i++) {
@@ -97,7 +90,7 @@ public class OTUser extends ParseUser{
         return calendarId + " " + eventList;
     }
 
-    public void setEventList(List<CalendarEvent> eventList) {
+    public void setEventList(List<CalendarEvent> eventList, ParseUser parseUser) {
         this.eventList = eventList;
         JSONArray eventsJSON = new JSONArray();
         Gson g = new Gson();
@@ -111,7 +104,7 @@ public class OTUser extends ParseUser{
             }
            eventsJSON.put(eventJson);
         }
-        put("calendarEvents", eventsJSON);
+        parseUser.put("calendarEvents", eventsJSON);
     }
 
     public void setCalendarId(String calendarId) {

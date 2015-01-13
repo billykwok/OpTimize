@@ -1,0 +1,11 @@
+staging
+	manifest 
+		 <meta-data
+	            android:name="EASEMOB_APPKEY"
+	            android:value="eventxtra#evenlinkstaging" />
+	EvenManager:
+		public final String CLIENT_ID = "1ce5242e0c31e8fee507c981f296e0c1e6a5e05d4fdf7f43f649c10904583982";
+
+		public final String CLIENT_SECRET = "a39f6cb52f8e2597711a478d34bd77a0eade3032416e2f6f2c43e902c4a8f67f";
+
+		private final String API_BASE = "https://2vanx.com/";

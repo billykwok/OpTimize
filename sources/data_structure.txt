@@ -10,13 +10,13 @@ OTUser {
 			long begin;
 			long end;
 		}
-		JsonArray otEvents: String otEventId;
+		JsonArray otEventsId: String otEventId;
 	}
 }
 
 OTEvent {
 	ParseObject {
-		long otEventId ~ objectId;
+		String otEventId ~ objectId;
 		String title;
 		String venue;
 		String hostId;

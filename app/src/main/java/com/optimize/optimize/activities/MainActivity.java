@@ -1,34 +1,29 @@
 package com.optimize.optimize.activities;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
 
-import com.optimize.optimize.EventTimeType;
 import com.optimize.optimize.R;
 import com.optimize.optimize.calendar.CalendarEvent;
 import com.optimize.optimize.calendar.CalendarService;
 import com.optimize.optimize.fragments.AddParticipantFragment;
 import com.optimize.optimize.fragments.NavigationDrawerFragment;
-import com.optimize.optimize.models.OTEvent;
-import com.optimize.optimize.models.OTUser;
-import com.optimize.optimize.models.Participant;
 import com.optimize.optimize.utilities.ToTo;
 import com.parse.ParseException;
 import com.parse.SaveCallback;
-import com.parse.SignUpCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class MainActivity extends OTActivity
@@ -69,7 +64,7 @@ public class MainActivity extends OTActivity
         celist1.add(CalendarService.createEvent("Piano", 2015, 1, 8, 12, 00, 2015, 1, 8, 13, 00));
         celist1.add(CalendarService.createEvent("Tutorial(qin)", 2015, 1, 8, 13, 30, 2015, 1, 8, 15, 30));
 
-        OTUser sample_user = new OTUser();
+        /*OTUser sample_user = new OTUser();
 
         sample_user.setEventList(celist1);
         sample_user.setEmail("sample_user@gmail.com");
@@ -87,7 +82,7 @@ public class MainActivity extends OTActivity
                     e.printStackTrace();
                 }
             }
-        });
+        });*/
 
     }
 

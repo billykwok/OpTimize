@@ -38,11 +38,11 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         switch (eventTimeType) {
             case Start:
 //                ToTo.show("Start: "+String.valueOf(hourOfDay) + " "+ String.valueOf(minute), getActivity());
-                CalendarManager.getInstance().setStartHour((int)(hourOfDay+0.5));
+                CalendarManager.getInstance().setStartHour(hourOfDay);
                 return;
             case End:
 //                ToTo.show("End: "+String.valueOf(hourOfDay) + " "+ String.valueOf(minute), getActivity());
-                CalendarManager.getInstance().setEndHour((int)(hourOfDay+0.5));
+                CalendarManager.getInstance().setEndHour(hourOfDay);
                 return;
         }
 

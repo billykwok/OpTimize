@@ -17,7 +17,7 @@ import com.optimize.optimize.activities.OTActivity;
  */
 public class OTFragment extends Fragment {
 
-
+    final String TAG = "OTFragment";
     public OTFragment() {
         // Required empty public constructor
     }
