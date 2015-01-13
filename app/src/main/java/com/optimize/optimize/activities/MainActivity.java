@@ -16,12 +16,15 @@ import android.support.v4.widget.DrawerLayout;
 import com.optimize.optimize.EventTimeType;
 import com.optimize.optimize.R;
 import com.optimize.optimize.calendar.CalendarEvent;
+import com.optimize.optimize.calendar.CalendarService;
 import com.optimize.optimize.fragments.AddParticipantFragment;
 import com.optimize.optimize.fragments.NavigationDrawerFragment;
 import com.optimize.optimize.models.OTEvent;
 import com.optimize.optimize.models.OTUser;
 import com.optimize.optimize.models.Participant;
+import com.optimize.optimize.utilities.ToTo;
 import com.parse.ParseException;
+import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 import java.util.ArrayList;
@@ -54,6 +57,38 @@ public class MainActivity extends OTActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        //test case
+        List<CalendarEvent> celist1 = new ArrayList<CalendarEvent>();
+        celist1.add(CalendarService.createEvent("ISOM1380", 2015, 1, 5, 9, 0, 2015, 1, 5, 12, 0));
+        celist1.add(CalendarService.createEvent("TutorialMon", 2015, 1, 5, 13, 30, 2015, 1, 5, 15, 30));
+        celist1.add(CalendarService.createEvent("Meeting", 2015, 1, 5, 20, 0, 2015, 1, 5, 23, 0));
+        celist1.add(CalendarService.createEvent("ISOM1380(2)", 2015, 1, 7, 9, 0, 2015, 1, 7, 12, 0));
+        celist1.add(CalendarService.createEvent("TutorialMon", 2015, 1, 7, 13, 30, 2015, 1, 7, 15, 30));
+        celist1.add(CalendarService.createEvent("Tutorial(ang)", 2015, 1, 8, 9, 30, 2015, 1, 8, 11, 30));
+        celist1.add(CalendarService.createEvent("Piano", 2015, 1, 8, 12, 00, 2015, 1, 8, 13, 00));
+        celist1.add(CalendarService.createEvent("Tutorial(qin)", 2015, 1, 8, 13, 30, 2015, 1, 8, 15, 30));
+
+        OTUser sample_user = new OTUser();
+
+        sample_user.setEventList(celist1);
+        sample_user.setEmail("sample_user@gmail.com");
+        sample_user.setPassword("sample_password");
+        sample_user.setUsername("sample_user_name");
+
+        sample_user.signUpInBackground();
+
+        sample_user.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    ToTo.show("save success", MainActivity.this);
+                } else {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
     @Override
