@@ -58,6 +58,7 @@ public class AddParticipantFragment extends OTFragment {
 
     CalendarManager cm;
 
+    List<ParseUser> parseUsers;
 
     ArrayAdapter<String> arrayAdapter;
     private int[] withinTypeRes = {R.string.within_day, R.string.within_week, R.string.within_month};
@@ -76,6 +77,7 @@ public class AddParticipantFragment extends OTFragment {
         View view = inflater.inflate(R.layout.fragment_add_participant, container, false);
         ButterKnife.inject(this, view);
         cm = CalendarManager.getInstance();
+        parseUsers = new ArrayList<>();
         arrayAdapter = new ArrayAdapter<String>(ot(), android.R.layout.simple_spinner_item, getWithInType());
         spinnerWithin.setAdapter(arrayAdapter);
         return view;
@@ -98,7 +100,7 @@ public class AddParticipantFragment extends OTFragment {
 
     @OnClick(R.id.btnFind)
     void onBtnFindClick() {
-        String username = etxtFindUser.getText().toString();
+        String username = etxtFindUser.getText().toString().trim();
         ParseQuery<ParseUser> userParseQuery = ParseQuery.getQuery(ParseUser.class);
         userParseQuery.whereEqualTo("username", username);
         ot().blockForApi();
@@ -106,10 +108,7 @@ public class AddParticipantFragment extends OTFragment {
             @Override
             public void done(List<ParseUser> parseUsers, ParseException e) {
                 ot().dismissBlockForApi();
-                if (e == null) {
-                    OTUserService otUserService = ParseObject.createWithoutData(OTUserService.class, parseUsers.get(0).getObjectId());
-                    Log.d(TAG, otUserService.getObjectId());
-                }
+
             }
         });
     }
