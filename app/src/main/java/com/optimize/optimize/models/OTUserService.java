@@ -51,7 +51,7 @@ public class OTUserService {
 
 
     public static List<CalendarEvent> getEvents(ParseUser parseUser) {
-        JSONArray calendarEventJsons = (JSONArray) parseUser.get("calendarEvents");
+        JSONArray calendarEventJsons = parseUser.getJSONArray("calendarEvents");
         List<CalendarEvent> calendarEvents = new ArrayList<CalendarEvent>();
         if (calendarEventJsons != null) {
             for (int i = 0; i < calendarEventJsons.length(); i++) {
