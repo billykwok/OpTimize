@@ -26,6 +26,7 @@ import com.optimize.optimize.calendar.TimeSlot;
 import com.optimize.optimize.models.OTEvent;
 import com.optimize.optimize.utilities.ToTo;
 import com.parse.ParseException;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.ArrayList;
@@ -91,8 +92,19 @@ public class CreateEventFragment extends OTFragment implements OnClickListener{
                 Log.i("Results", "Title: " + title + "Location: " + location + "Des: " +
                         description + "Time: " + time);
 
-                OTEvent otEvent = new OTEvent(title, timeSlot.getStart(), timeSlot.getEnd(), description, location);
-                otEvent.saveInBackground();
+                final OTEvent otEvent = new OTEvent(title, timeSlot.getStart(), timeSlot.getEnd(), description, location);
+                otEvent.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            List<ParseUser> users = ot().getParseUsers();
+                            String otEventId = otEvent.getObjectId();
+                            for (ParseUser parseUser: users) {
+                                //add otEventId to otEventsId in Parse user
+                            }
+                        }
+                    }
+                });
 
                 CalendarService.exportEvent(getActivity().getBaseContext(), new CalendarEvent(title,
                                             timeSlot.getStart(), timeSlot.getEnd()), location, description,

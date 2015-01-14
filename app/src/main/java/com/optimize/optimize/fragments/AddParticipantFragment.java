@@ -107,8 +107,7 @@ public class AddParticipantFragment extends OTFragment {
             public void done(List<ParseUser> parseUsers, ParseException e) {
                 ot().dismissBlockForApi();
                 if (e == null) {
-                    OTUserService otUserService = ParseObject.createWithoutData(OTUserService.class, parseUsers.get(0).getObjectId());
-                    Log.d(TAG, otUserService.getObjectId());
+
                 }
             }
         });

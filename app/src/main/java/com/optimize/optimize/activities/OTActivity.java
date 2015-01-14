@@ -12,6 +12,7 @@ import com.optimize.optimize.R;
 import com.optimize.optimize.calendar.TimeSlot;
 import com.optimize.optimize.fragments.TimePickerFragment;
 import com.optimize.optimize.models.Participant;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class OTActivity extends ActionBarActivity {
     final String TAG_OT = "OTActivity";
     private List<TimeSlot> possibleTimeSlots;
     private List<Participant> participants;
+    private List<ParseUser> parseUsers;
 
     public static final String TAG = "OTActivity";
 
@@ -66,6 +68,14 @@ public class OTActivity extends ActionBarActivity {
 
     public void setParticipants(List<Participant> participants) {
         this.participants = participants;
+    }
+
+    public List<ParseUser> getParseUsers() {
+        return parseUsers;
+    }
+
+    public void setParseUsers(List<ParseUser> parseUsers) {
+        this.parseUsers = parseUsers;
     }
 
     public void showTimePickerDialog(EventTimeType eventTimeType) {
