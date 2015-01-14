@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import com.optimize.optimize.EventTimeType;
 import com.optimize.optimize.R;
 import com.optimize.optimize.WithInType;
+import com.optimize.optimize.adapters.AddParticipantsAdapter;
 import com.optimize.optimize.calendar.CalendarManager;
 import com.optimize.optimize.models.OTUserService;
 import com.parse.FindCallback;
@@ -61,6 +62,7 @@ public class AddParticipantFragment extends OTFragment {
     List<ParseUser> parseUsers;
 
     ArrayAdapter<String> arrayAdapter;
+    AddParticipantsAdapter addParticipantsAdapter;
     private int[] withinTypeRes = {R.string.within_day, R.string.within_week, R.string.within_month};
 
 
@@ -80,6 +82,8 @@ public class AddParticipantFragment extends OTFragment {
         parseUsers = new ArrayList<>();
         arrayAdapter = new ArrayAdapter<String>(ot(), android.R.layout.simple_spinner_item, getWithInType());
         spinnerWithin.setAdapter(arrayAdapter);
+        addParticipantsAdapter = new AddParticipantsAdapter(ot(), parseUsers);
+        lsParticipants.setAdapter(addParticipantsAdapter);
         return view;
     }
 
@@ -108,7 +112,8 @@ public class AddParticipantFragment extends OTFragment {
             @Override
             public void done(List<ParseUser> parseUsers, ParseException e) {
                 ot().dismissBlockForApi();
-
+                AddParticipantFragment.this.parseUsers.addAll(parseUsers);
+                AddParticipantFragment.this.addParticipantsAdapter.notifyDataSetChanged();
             }
         });
     }
