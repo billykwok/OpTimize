@@ -100,7 +100,7 @@ public class CreateEventFragment extends OTFragment implements OnClickListener{
                             List<ParseUser> users = ot().getParseUsers();
                             String otEventId = otEvent.getObjectId();
                             for (ParseUser parseUser: users) {
-                                //add otEventId to otEventsId in Parse user
+                                //TODO add otEventId to otEventsId in Parse user
                             }
                         }
                     }

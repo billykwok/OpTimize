@@ -41,7 +41,7 @@ public class TimeSlot implements Comparable {
 
     @Override
     public String toString() {
-        return "From " + DateUtils.convertDate(start, "dd/MM hh:mm") +
+        return "From " + DateUtils.convertDate(start, "dd/MM hh:mm AA") +
                 " To " + DateUtils.convertDate(end, "hh:mm") +
                 " Conflict: " + numOfConflict;
     }

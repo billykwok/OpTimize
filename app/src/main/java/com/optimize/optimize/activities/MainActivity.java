@@ -58,7 +58,7 @@ public class MainActivity extends OTActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
         //test create event page
-        CreateEventFragment newFragment = new CreateEventFragment();
+/*        CreateEventFragment newFragment = new CreateEventFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.addToBackStack(null);
         transaction.replace(R.id.container, newFragment);
@@ -155,17 +155,17 @@ public class MainActivity extends OTActivity
                 }
             }
         });
-
+*/
 
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.container, new AddParticipantFragment())
-//                .commit();
+       // update the main content by replacing fragments
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, new AddParticipantFragment())
+                .commit();
     }
 
     public void onSectionAttached(int number) {
