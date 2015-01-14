@@ -84,6 +84,17 @@ public class CalendarManager {
         return hour * android.text.format.DateUtils.HOUR_IN_MILLIS;
     }
 
+    /**
+     * @param userList            userList with List of Calendar Event
+     * @param title               Event Title
+     * @param duration            time duration in milli second
+     * @param startTimeBoundary   Start Time in a day (0-23)
+     * @param endTimeBoundary     End Time in a day, end time must be larger than Start Time (0-23)
+     * @param comparisonStartTime Comparison Period Start Time in milli second
+     * @param comparisonEndTime   Comparison Period End Time in milli second
+     * @param n                   Maximum number of possible Timeslot return.
+     * @return possible TimeSlots List
+     */
 
     public static List<TimeSlot> getOptimumTimeSlots(List<ParseUser> userList,
                                               String title,
