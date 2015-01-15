@@ -32,8 +32,6 @@ public class OTEvent extends ParseObject{
 
     }
 
-    public OTEvent(String s, long start, long end, Date date, String s1, String s2) {}
-
     public OTEvent(String title, long begin, long end, String venue, String description) {
         setTitle(title);
         setBegin(begin);

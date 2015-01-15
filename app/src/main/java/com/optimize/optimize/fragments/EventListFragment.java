@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.optimize.android.BaseFragment;
 import com.optimize.optimize.R;
 import com.optimize.optimize.adapters.OTEventAdapter;
+import com.optimize.optimize.hack.DividerItemDecoration;
 import com.optimize.optimize.models.OTEvent;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class EventListFragment extends BaseFragment {
         View rootView = inflater.inflate(R.layout.fragment_oteventlist, container, false);
         rvOTEvent = (RecyclerView) rootView.findViewById(R.id.rv_otevent);
         rvOTEvent.setHasFixedSize(true);
+        rvOTEvent.addItemDecoration(new DividerItemDecoration(getActivity(), null));
         return rootView;
     }
 
@@ -44,8 +46,8 @@ public class EventListFragment extends BaseFragment {
     private List<OTEvent> testData() {
         List<OTEvent> otEventList = new ArrayList<>();
         for (int i = 1; i <= 20; ++i) {
-            long start = Double.doubleToLongBits(Math.random());
-            long end = start + 1000000000;
+            long start = new Date().getTime();
+            long end = start + 100000000;
             otEventList.add(new OTEvent("Event " + Integer.toString(i), start, end, "Venue " + Integer.toString(i), "Description " + Integer.toString(i)));
         }
         return otEventList;

@@ -17,7 +17,7 @@ public class DateUtils {
     }
 
     public static String convertDate(long dateInMilliseconds) {
-        return DateFormat.format("yyyy-mm-dd HH:mm:ss", dateInMilliseconds).toString();
+        return DateFormat.format("MMM dd, yy HH:mm", dateInMilliseconds).toString();
     }
 //    final static String TAG = "DateUtils";
 //    public DateUtils(){
