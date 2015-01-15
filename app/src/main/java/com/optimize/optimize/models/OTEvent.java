@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,7 +28,11 @@ public class OTEvent extends ParseObject{
     private String description;
     private List<Participant> participants;
 
-    public OTEvent(){}
+    public OTEvent() {
+
+    }
+
+    public OTEvent(String s, long start, long end, Date date, String s1, String s2) {}
 
     public OTEvent(String title, long begin, long end, String venue, String description) {
         setTitle(title);
