@@ -7,6 +7,8 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
+import com.optimize.android.ActionBarActivityBase;
+import com.optimize.android.ObjectContainer;
 import com.optimize.optimize.EventTimeType;
 import com.optimize.optimize.R;
 import com.optimize.optimize.calendar.TimeSlot;
@@ -19,7 +21,7 @@ import java.util.List;
 /**
  * Created by samwalker on 1/1/15.
  */
-public class OTActivity extends ActionBarActivity {
+public class OTActionBarActivity extends ActionBarActivityBase {
 
     ProgressDialog pd;
     final String TAG_OT = "OTActivity";
@@ -85,4 +87,10 @@ public class OTActivity extends ActionBarActivity {
         newFragment.setArguments(b);
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
+
+    @Override
+    protected ObjectContainer getRetainedObjectsContainer() {
+        return null;
+    }
+
 }

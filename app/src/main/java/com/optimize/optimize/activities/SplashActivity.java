@@ -1,13 +1,13 @@
 package com.optimize.optimize.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.optimize.android.ActivityBase;
 import com.optimize.optimize.R;
 
-public class SplashActivity extends Activity {
+public class SplashActivity extends ActivityBase {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.optimize.optimize.R;
-import com.optimize.optimize.activities.OTActivity;
+import com.optimize.optimize.activities.OTActionBarActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,8 +30,8 @@ public class OTFragment extends Fragment {
         return textView;
     }
 
-    public OTActivity ot(){
-        return (OTActivity)getActivity();
+    public OTActionBarActivity ot(){
+        return (OTActionBarActivity)getActivity();
     }
 
 

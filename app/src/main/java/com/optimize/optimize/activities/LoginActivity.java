@@ -1,24 +1,18 @@
 package com.optimize.optimize.activities;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.optimize.optimize.R;
 import com.optimize.optimize.models.OTUserService;
-import com.optimize.optimize.utilities.ToTo;
-import com.parse.ParseException;
-import com.parse.SignUpCallback;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class LoginActivity extends OTActivity {
+public class LoginActivity extends OTActionBarActivity {
 
     @InjectView(R.id.etxtUsername)
     EditText etxtUsername;

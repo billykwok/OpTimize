@@ -1,11 +1,9 @@
 package com.optimize.optimize.fragments;
 
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +17,10 @@ import android.widget.TextView;
 import android.view.View.OnClickListener;
 import com.optimize.optimize.R;
 import com.optimize.optimize.activities.MainActivity;
-import com.optimize.optimize.activities.OTActivity;
 import com.optimize.optimize.calendar.CalendarEvent;
 import com.optimize.optimize.calendar.CalendarService;
 import com.optimize.optimize.calendar.TimeSlot;
 import com.optimize.optimize.models.OTEvent;
-import com.optimize.optimize.utilities.ToTo;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;

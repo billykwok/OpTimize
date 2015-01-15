@@ -1,7 +1,6 @@
 package com.optimize.optimize.activities;
 
 import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,24 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.optimize.optimize.R;
-import com.optimize.optimize.calendar.CalendarEvent;
-import com.optimize.optimize.calendar.CalendarService;
 import com.optimize.optimize.fragments.AddParticipantFragment;
-import com.optimize.optimize.fragments.CreateEventFragment;
 import com.optimize.optimize.fragments.NavigationDrawerFragment;
-import com.optimize.optimize.models.OTUserService;
-import com.optimize.optimize.utilities.ToTo;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
-
-public class MainActivity extends OTActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class MainActivity extends OTActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
