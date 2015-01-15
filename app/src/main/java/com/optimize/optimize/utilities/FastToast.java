@@ -6,9 +6,9 @@ import android.widget.Toast;
 /**
  * Created by samwalker on 31/12/14.
  */
-public class ToTo {
+public class FastToast {
 
-    private ToTo(){};
+    private FastToast() {};
 
     public static void show(String message, Context context){
         Toast.makeText(context, message,Toast.LENGTH_SHORT).show();

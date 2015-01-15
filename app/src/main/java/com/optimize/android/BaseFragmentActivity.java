@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 
-public abstract class FragmentActivityBase extends FragmentActivity {
+public abstract class BaseFragmentActivity extends FragmentActivity {
 
 	protected void startActivity(Class<? extends Activity> activityClass) {
 		this.startActivity(activityClass, (Intent) null);

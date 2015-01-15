@@ -2,12 +2,10 @@ package com.optimize.optimize.activities;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
-import com.optimize.android.ActionBarActivityBase;
+import com.optimize.android.BaseActionBarActivity;
 import com.optimize.android.ObjectContainer;
 import com.optimize.optimize.EventTimeType;
 import com.optimize.optimize.R;
@@ -21,7 +19,7 @@ import java.util.List;
 /**
  * Created by samwalker on 1/1/15.
  */
-public class OTActionBarActivity extends ActionBarActivityBase {
+public class OTActionBarActivity extends BaseActionBarActivity {
 
     ProgressDialog pd;
     final String TAG_OT = "OTActivity";

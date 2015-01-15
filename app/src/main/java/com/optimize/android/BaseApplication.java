@@ -3,15 +3,15 @@ package com.optimize.android;
 import android.app.Activity;
 import android.content.Intent;
 
-public class ApplicationBase extends android.app.Application {
+public class BaseApplication extends android.app.Application {
 
-	private static ApplicationBase instance;
+	private static BaseApplication instance;
 
-	public static ApplicationBase get() {
+	public static BaseApplication get() {
 		return instance;
 	}
 
-	public ApplicationBase() {
+	public BaseApplication() {
 		instance = this;
 	}
 

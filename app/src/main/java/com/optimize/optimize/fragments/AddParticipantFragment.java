@@ -20,7 +20,7 @@ import com.optimize.optimize.WithInType;
 import com.optimize.optimize.adapters.AddParticipantsAdapter;
 import com.optimize.optimize.calendar.CalendarManager;
 import com.optimize.optimize.calendar.TimeSlot;
-import com.optimize.optimize.utilities.ToTo;
+import com.optimize.optimize.utilities.FastToast;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -129,7 +129,7 @@ public class AddParticipantFragment extends OTFragment {
                     AddParticipantFragment.this.parseUsers.addAll(parseUsers);
                     AddParticipantFragment.this.addParticipantsAdapter.notifyDataSetChanged();
                 } else {
-                    ToTo.show(R.string.no_such_user, ot());
+                    FastToast.show(R.string.no_such_user, ot());
                 }
             }
         });

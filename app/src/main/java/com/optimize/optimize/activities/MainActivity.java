@@ -1,57 +1,50 @@
 package com.optimize.optimize.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v4.app.FragmentTransaction;
 
 import com.optimize.optimize.R;
-import com.optimize.optimize.fragments.AddParticipantFragment;
-import com.optimize.optimize.fragments.NavigationDrawerFragment;
+import com.optimize.optimize.calendar.CalendarEvent;
+import com.optimize.optimize.calendar.CalendarService;
+import com.optimize.optimize.fragments.CreateEventFragment;
+import com.optimize.optimize.fragments.EventListFragment;
+import com.optimize.optimize.models.OTUserService;
+import com.optimize.optimize.utilities.FastToast;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class MainActivity extends OTActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
-
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
-
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
-    private CharSequence mTitle;
+public class MainActivity extends OTActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
+        EventListFragment newFragment = new EventListFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.addToBackStack(null);
+        transaction.replace(R.id.container, newFragment);
+        transaction.commit();
 
-        // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+        // Test Event
+        // testMe();
+    }
 
-        //test create event page
-/*        CreateEventFragment newFragment = new CreateEventFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+    private void testMe() {
+
+        CreateEventFragment newFragment = new CreateEventFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.addToBackStack(null);
         transaction.replace(R.id.container, newFragment);
         transaction.commit();
 
         //test case
-        List<CalendarEvent> celist1 = new ArrayList<CalendarEvent>();
+        List<CalendarEvent> celist1 = new ArrayList<>();
         celist1.add(CalendarService.createEvent("ISOM1380", 2015, 1, 19, 9, 0, 2015, 1, 19, 12, 0));
         celist1.add(CalendarService.createEvent("TutorialMon", 2015, 1, 19, 13, 30, 2015, 1, 19, 15, 30));
         celist1.add(CalendarService.createEvent("Meeting", 2015, 1, 19, 20, 0, 2015, 1, 19, 23, 0));
@@ -74,14 +67,14 @@ public class MainActivity extends OTActionBarActivity implements NavigationDrawe
             @Override
             public void done(ParseException e) {
                 if (e == null) {
-                    ToTo.show("save success", MainActivity.this);
+                    FastToast.show("save success", MainActivity.this);
                 } else {
                     e.printStackTrace();
                 }
             }
         });
 
-        List<CalendarEvent> celist2 = new ArrayList<CalendarEvent>();
+        List<CalendarEvent> celist2 = new ArrayList<>();
         celist2.add(CalendarService.createEvent("MathTutorial", 2015, 1, 19, 9, 30, 2015, 1, 19, 10, 20));
         celist2.add(CalendarService.createEvent("2711Tutorial", 2015, 1, 19, 10, 30, 2015, 1, 19, 11, 20));
         celist2.add(CalendarService.createEvent("Math", 2015, 1, 19, 13, 30, 2015, 1, 19, 14, 20));
@@ -109,14 +102,14 @@ public class MainActivity extends OTActionBarActivity implements NavigationDrawe
             @Override
             public void done(ParseException e) {
                 if (e == null) {
-                    ToTo.show("save success", MainActivity.this);
+                    FastToast.show("save success", MainActivity.this);
                 } else {
                     e.printStackTrace();
                 }
             }
         });
 
-        List<CalendarEvent> celist3 = new ArrayList<CalendarEvent>();
+        List<CalendarEvent> celist3 = new ArrayList<>();
         celist3.add(CalendarService.createEvent("TEMG", 2015, 1, 19, 16, 30, 2015, 1, 19, 17, 20));
         celist3.add(CalendarService.createEvent("ReU", 2015, 1, 20, 19, 0, 2015, 1, 20, 23, 00));
         celist3.add(CalendarService.createEvent("Study", 2015, 1, 21, 10, 30, 2015, 1, 21, 15, 30));
@@ -135,113 +128,12 @@ public class MainActivity extends OTActionBarActivity implements NavigationDrawe
             @Override
             public void done(ParseException e) {
                 if (e == null) {
-                    ToTo.show("save success", MainActivity.this);
+                    FastToast.show("save success", MainActivity.this);
                 } else {
                     e.printStackTrace();
                 }
             }
         });
-*/
-
-    }
-
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-       // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, new AddParticipantFragment())
-                .commit();
-    }
-
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-        }
-    }
-
-    public void restoreActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.main, menu);
-            restoreActionBar();
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
     }
 
 }

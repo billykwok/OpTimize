@@ -3,10 +3,10 @@ package com.optimize.optimize.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.view.View.OnClickListener;
+
 import com.optimize.optimize.R;
 import com.optimize.optimize.activities.MainActivity;
 import com.optimize.optimize.calendar.CalendarEvent;
@@ -28,32 +28,25 @@ import com.parse.SaveCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class CreateEventFragment extends OTFragment implements OnClickListener{
-
 
     public CreateEventFragment() {
         // Required empty public constructor
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View scrollView = inflater.inflate(R.layout.fragment_create_event, container, false);
         LinearLayout linearLayout = (LinearLayout) scrollView.findViewById(R.id.create_event_form_layout);
 
-        List<TimeSlot> possibleTimeSlot = new ArrayList<TimeSlot>();
+        List<TimeSlot> possibleTimeSlot = new ArrayList<>();
 
         //Test case
-        List<CalendarEvent> ce = new ArrayList<CalendarEvent>();
+        List<CalendarEvent> ce;
         ce = CalendarService.getEventList(getActivity().getBaseContext(),CalendarService.getCalendarIdList(getActivity().getBaseContext()));
         possibleTimeSlot.add(new TimeSlot(ce.get(0).getBegin(), ce.get(0).getEnd()));
 
-//        List<TimeSlot> possibleTimeSlot = ot().getPossibleTimeSlots();
-
+        // List<TimeSlot> possibleTimeSlot = ot().getPossibleTimeSlots();
         Spinner timeSlotSpinner = (Spinner) linearLayout.findViewById(R.id.TimeSlotSpinner);
 
         ArrayAdapter<TimeSlot> adapter = new ArrayAdapter<TimeSlot>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, possibleTimeSlot);
@@ -106,7 +99,7 @@ public class CreateEventFragment extends OTFragment implements OnClickListener{
                                             timeSlot.getStart(), timeSlot.getEnd()), location, description,
                                             CalendarService.getCalendarId(getActivity().getBaseContext()));
 
-                        /*new SaveCallback() {
+                /*new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
                         if (e == null) {

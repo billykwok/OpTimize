@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.optimize.android.ActivityBase;
+import com.optimize.android.BaseActivity;
 import com.optimize.optimize.R;
 
-public class SplashActivity extends ActivityBase {
+public class SplashActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

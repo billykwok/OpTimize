@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
-public abstract class FragmentBase extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
 	private boolean isStopping = false;
 
@@ -43,8 +43,8 @@ public abstract class FragmentBase extends Fragment {
 		return isStopping;
 	}
 
-	public FragmentActivityBase getFragmentActivity() {
-		return (FragmentActivityBase) this.getActivity();
+	public BaseFragmentActivity getFragmentActivity() {
+		return (BaseFragmentActivity) this.getActivity();
 	}
 
 	public void putRetained(String key, Object object) {
