@@ -97,7 +97,7 @@ public class MainActivity extends OTActionBarActivity {
             @Override
             public void onClick(View v) {
                 FastToast.show("Hi", MainActivity.this);
-                startActivity(CreateEventActivity.class, );
+                startActivity(CreateEventActivity.class);
             }
         });
 

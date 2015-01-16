@@ -53,6 +53,12 @@ public class CreateEventActivity extends OTActionBarActivity {
         setTitle("New Event");
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+        toolbar.setNavigationOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CreateEventActivity.this.finish();
+            }
+        });
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
         List<TimeSlot> possibleTimeSlot = new ArrayList<>();
