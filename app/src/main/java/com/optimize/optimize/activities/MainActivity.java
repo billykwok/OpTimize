@@ -1,16 +1,20 @@
 package com.optimize.optimize.activities;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.balysv.materialmenu.MaterialMenuDrawable;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.optimize.optimize.R;
 import com.optimize.optimize.calendar.CalendarEvent;
 import com.optimize.optimize.calendar.CalendarService;
-import com.optimize.optimize.fragments.CreateEventFragment;
 import com.optimize.optimize.fragments.EventListFragment;
 import com.optimize.optimize.models.OTUserService;
 import com.optimize.optimize.utilities.FastToast;
@@ -21,24 +25,86 @@ import com.parse.SaveCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 public class MainActivity extends OTActionBarActivity {
+
+    @InjectView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @InjectView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+
+    @InjectView(R.id.fab_add)
+    FloatingActionButton fabAdd;
+
+    MaterialMenuDrawable btnMaterialMenu;
+    boolean isDrawerOpened;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
 
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.actionbar);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // Toolbar
+        setTitle("Events");
+        setSupportActionBar(toolbar);
+        btnMaterialMenu = new MaterialMenuDrawable(this, Color.WHITE, MaterialMenuDrawable.Stroke.THIN);
+        toolbar.setNavigationIcon(btnMaterialMenu);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
+        // Drawer
+        drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                btnMaterialMenu.setTransformationOffset(
+                        MaterialMenuDrawable.AnimationState.BURGER_ARROW,
+                        isDrawerOpened ? 2 - slideOffset : slideOffset);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) { isDrawerOpened = true; }
+
+            @Override
+            public void onDrawerClosed(View drawerView) { isDrawerOpened = false; }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+                if (newState == DrawerLayout.STATE_IDLE) {
+                    if (isDrawerOpened) {
+                        btnMaterialMenu.setIconState(MaterialMenuDrawable.IconState.ARROW);
+                    } else {
+                        btnMaterialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
+                    }
+                }
+            }
+        });
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isDrawerOpened) {
+                    drawerLayout.closeDrawer(Gravity.START);
+                } else {
+                    drawerLayout.openDrawer(Gravity.START);
+                }
+            }
+        });
+
+        // Floating Action Button
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FastToast.show("Hi", MainActivity.this);
+                startActivity(CreateEventActivity.class, );
+            }
+        });
+
+        // Load event list fragment
         EventListFragment newFragment = new EventListFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.addToBackStack(null);
-        transaction.replace(R.id.container, newFragment);
-        transaction.commit();
+        transaction.disallowAddToBackStack().replace(R.id.container, newFragment).commit();
 
         // Test Event
         // testMe();
@@ -62,13 +128,6 @@ public class MainActivity extends OTActionBarActivity {
     }
 
     private void testMe() {
-
-        CreateEventFragment newFragment = new CreateEventFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.addToBackStack(null);
-        transaction.replace(R.id.container, newFragment);
-        transaction.commit();
-
         //test case
         List<CalendarEvent> celist1 = new ArrayList<>();
         celist1.add(CalendarService.createEvent("ISOM1380", 2015, 1, 19, 9, 0, 2015, 1, 19, 12, 0));
