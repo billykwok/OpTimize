@@ -6,6 +6,7 @@ import android.os.Handler;
 
 import com.optimize.android.BaseActivity;
 import com.optimize.optimize.R;
+import com.parse.ParseUser;
 
 public class SplashActivity extends BaseActivity {
 
@@ -17,7 +18,11 @@ public class SplashActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                if (ParseUser.getCurrentUser() == null) {
+                    startActivity(LoginActivity.class);
+                } else {
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                }
                 finish();
             }
         }, 2000);
