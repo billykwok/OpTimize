@@ -1,24 +1,19 @@
 package com.optimize.optimize.activities;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.optimize.optimize.R;
 import com.optimize.optimize.models.OTUserService;
-import com.optimize.optimize.utilities.ToTo;
-import com.parse.ParseException;
-import com.parse.SignUpCallback;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class LoginActivity extends OTActivity{
+public class LoginActivity extends OTActionBarActivity {
+
     @InjectView(R.id.etxtUsername)
     EditText etxtUsername;
     @InjectView(R.id.actxtEmail)
@@ -29,6 +24,7 @@ public class LoginActivity extends OTActivity{
     Button btnSignIn;
     @InjectView(R.id.btnRegister)
     Button btnRegister;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,32 +74,5 @@ public class LoginActivity extends OTActivity{
 //            });
         }
     }
-
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 
 }

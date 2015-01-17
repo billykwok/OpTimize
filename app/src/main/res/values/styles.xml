@@ -1,8 +1,20 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/OTActionBar</item>
+        <item name="actionBarStyle">@style/OTActionBar</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="OTActionBar" parent="Widget.AppCompat.Toolbar">
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+
+        <item name="android:background">@color/ot_red_dark</item>
+        <item name="background">@color/ot_red_dark</item>
+
+        <item name="android:actionBarItemBackground">@color/ot_red_dark</item>
+        <item name="actionBarItemBackground">@color/ot_red_dark</item>
     </style>
 
     <style name="btn_add_parti">

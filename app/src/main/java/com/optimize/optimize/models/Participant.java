@@ -3,9 +3,13 @@ package com.optimize.optimize.models;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.parse.ParseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by samwalker on 10/1/15.
@@ -30,6 +34,17 @@ public class Participant {
 
     public void setAccepted(boolean accepted) {
         this.accepted = accepted;
+    }
+
+    public static List<Participant> fromParseUsers(List<ParseUser> parseUsers) {
+        List<Participant> participants = new ArrayList<>();
+        for (ParseUser parseUser: parseUsers) {
+            Participant participant = new Participant();
+            participant.setUserId(parseUser.getObjectId());
+            participant.setAccepted(false);
+            participants.add(participant);
+        }
+        return participants;
     }
 
     public JSONObject toJson() {

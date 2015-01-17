@@ -12,8 +12,12 @@ import java.util.Date;
  */
 public class DateUtils {
 
-    public static String convertDate(long dateInMilliseconds,String dateFormat) {
+    public static String convertDate(long dateInMilliseconds, String dateFormat) {
         return DateFormat.format(dateFormat, dateInMilliseconds).toString();
+    }
+
+    public static String convertDate(long dateInMilliseconds) {
+        return DateFormat.format("MMM dd, yy HH:mm", dateInMilliseconds).toString();
     }
 //    final static String TAG = "DateUtils";
 //    public DateUtils(){
