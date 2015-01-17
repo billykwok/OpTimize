@@ -3,6 +3,7 @@ package com.optimize.optimize.activities;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -11,11 +12,19 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.balysv.materialmenu.MaterialMenuDrawable;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
 import com.optimize.optimize.R;
 import com.optimize.optimize.calendar.CalendarEvent;
 import com.optimize.optimize.calendar.CalendarService;
 import com.optimize.optimize.calendar.TimeSlot;
+import com.optimize.optimize.models.OTEvent;
 import com.optimize.optimize.utilities.FastToast;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +85,7 @@ public class CreateEventActivity extends OTActionBarActivity {
             public void onClick(View v) {
                 FastToast.show("Create event", CreateEventActivity.this);
 
-                /*String name = etEventName.getText().toString();
+                String name = etEventName.getText().toString();
                 String location = "My home";
                 String description = etEventDesc.getText().toString();
                 String time = spEventTimeSlot.getSelectedItem().toString();
@@ -89,10 +98,12 @@ public class CreateEventActivity extends OTActionBarActivity {
                     @Override
                     public void done(ParseException e) {
                         if(e == null) {
-                            List<ParseUser> users = CreateEventActivity.this.ot().getParseUsers();
+                            List<ParseUser> users = CreateEventActivity.this.getParseUsers();
                             String otEventId = otEvent.getObjectId();
                             for(ParseUser parseUser : users) {
                                 //TODO add otEventId to otEventsId in Parse user
+                                JSONArray otEventIdList = parseUser.getJSONArray("otEventsId");
+                                otEventIdList.put(otEventId);
                             }
                         }
                     }
@@ -104,7 +115,7 @@ public class CreateEventActivity extends OTActionBarActivity {
                                 timeSlot.getEnd()),
                         location,
                         description,
-                        CalendarService.getCalendarId(getBaseContext()));*/
+                        CalendarService.getCalendarId(getBaseContext()));
 
                 /*new SaveCallback() {
                     @Override

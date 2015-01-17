@@ -1,5 +1,6 @@
 package com.optimize.optimize.calendar;
 
+import android.text.format.DateUtils;
 import android.util.Log;
 
 import com.optimize.optimize.WithInType;
@@ -21,9 +22,11 @@ public class CalendarManager {
     private int duration;
     private List<OTUserService> users;
 
-    public static final long ONE_HOUR_MILLIS = android.text.format.DateUtils.HOUR_IN_MILLIS;
-    public static final long HALF_HOUR_MILLIS = android.text.format.DateUtils.HOUR_IN_MILLIS / 2;
-    public static final long ONE_DAY_MILLIS = android.text.format.DateUtils.DAY_IN_MILLIS;
+    public static final long ONT_SEC_MILLIS = DateUtils.SECOND_IN_MILLIS;
+    public static final long ONE_MIN_MILLIS = DateUtils.MINUTE_IN_MILLIS;
+    public static final long ONE_HOUR_MILLIS = DateUtils.HOUR_IN_MILLIS;
+    public static final long HALF_HOUR_MILLIS = DateUtils.HOUR_IN_MILLIS / 2;
+    public static final long ONE_DAY_MILLIS = DateUtils.DAY_IN_MILLIS;
 
     final String TAG = "CalenderManager";
 
@@ -104,6 +107,15 @@ public class CalendarManager {
                                               long comparisonStartTime,
                                               long comparisonEndTime,
                                               int n) {
+
+//        // Set comparisonStartTime back to 0:00
+//        int hourOffSet = Integer.parseInt(com.optimize.optimize.utilities.DateUtils.convertDate(comparisonStartTime, "HH"));
+//        int minOffSet = Integer.parseInt(com.optimize.optimize.utilities.DateUtils.convertDate(comparisonStartTime, "mm"));
+//        int secOffSet = Integer.parseInt(com.optimize.optimize.utilities.DateUtils.convertDate(comparisonStartTime, "ss"));
+//        long timeOffSet = hourOffSet * ONE_HOUR_MILLIS + minOffSet * ONE_MIN_MILLIS + secOffSet * ONT_SEC_MILLIS;
+//        comparisonStartTime = comparisonStartTime - timeOffSet;
+//        //If input of comparisonEndTime is not the end of the day, this code is needed
+//        comparisonEndTime = comparisonEndTime - timeOffSet + 1 * ONE_DAY_MILLIS;
 
         // Generate Possible time slots within the boundary time
         List<TimeSlot> possibleTimeSlots = new ArrayList<TimeSlot>();
