@@ -18,7 +18,7 @@ OTEvent {
 	ParseObject {
 		String otEventId ~ objectId;
 		String title;
-		String venue;
+		String description;
 		String hostId;
 		JsonArray participants: JsonObject participant {
 			String userId;
@@ -28,3 +28,21 @@ OTEvent {
 }
 
 //TODO james please add the fields you need. 
+
+
+    public List<CalendarEvent> getEventsFromJSON() {
+        JSONArray participantsJson = (JSONArray) get("participants");
+        List<Participant> participantList = new ArrayList<Participant>();
+        if (participantsJson != null) {
+            for (int i = 0; i < participantsJson.length(); i++) {
+                JSONObject participantJsonObj = participantsJson.optJSONObject(i);
+                Gson g = new Gson();
+                Participant participant = g.fromJson(participantJsonObj.toString(), Participant.class);
+                participantList.add(participant);
+            }
+        } else {
+            Log.e(, "calendarEventJsons is null");
+        }
+        eventList = calendarEvents;
+        return calendarEvents;
+    }

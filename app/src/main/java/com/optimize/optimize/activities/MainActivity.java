@@ -17,12 +17,15 @@ import com.optimize.optimize.calendar.CalendarEvent;
 import com.optimize.optimize.calendar.CalendarService;
 import com.optimize.optimize.fragments.EventListFragment;
 import com.optimize.optimize.models.OTUserService;
+import com.parse.LogInCallback;
 import com.optimize.optimize.utilities.FastToast;
 import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -110,6 +113,7 @@ public class MainActivity extends OTActionBarActivity {
         // testMe();
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -126,5 +130,6 @@ public class MainActivity extends OTActionBarActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
 }
