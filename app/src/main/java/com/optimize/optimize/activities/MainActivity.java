@@ -1,12 +1,13 @@
 package com.optimize.optimize.activities;
 
 import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,11 +22,14 @@ import com.optimize.optimize.fragments.CreateEventFragment;
 import com.optimize.optimize.fragments.NavigationDrawerFragment;
 import com.optimize.optimize.models.OTUserService;
 import com.optimize.optimize.utilities.ToTo;
+import com.parse.LogInCallback;
 import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -59,7 +63,7 @@ public class MainActivity extends OTActivity
 
         //test create event page
         CreateEventFragment newFragment = new CreateEventFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.addToBackStack(null);
         transaction.replace(R.id.container, newFragment);
         transaction.commit();
@@ -74,26 +78,26 @@ public class MainActivity extends OTActivity
         celist1.add(CalendarService.createEvent("Tutorial(ang)", 2015, 1, 22, 9, 30, 2015, 1, 22, 11, 30));
         celist1.add(CalendarService.createEvent("Piano", 2015, 1, 22, 12, 00, 2015, 1, 22, 13, 00));
         celist1.add(CalendarService.createEvent("Tutorial(qin)", 2015, 1, 22, 13, 30, 2015, 1, 22, 15, 30));
-
-        ParseUser sample_user1 = new ParseUser();
-
-        OTUserService.setEventList(celist1, sample_user1);
-        sample_user1.setUsername("sample_user_name1");
-        sample_user1.setPassword("sample_password1");
-        sample_user1.setEmail("sample_user1@gmail.com");
-
-        sample_user1.signUpInBackground();
-
-        sample_user1.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    ToTo.show("save success", MainActivity.this);
-                } else {
-                    e.printStackTrace();
-                }
-            }
-        });
+//
+//        ParseUser sample_user1 = new ParseUser();
+//
+//        OTUserService.setEventList(celist1, sample_user1);
+//        sample_user1.setUsername("sample_user_name1");
+//        sample_user1.setPassword("sample_password1");
+//        sample_user1.setEmail("sample_user1@gmail.com");
+//
+//        sample_user1.signUpInBackground();
+//
+//        sample_user1.saveInBackground(new SaveCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                if (e == null) {
+//                    ToTo.show("save success", MainActivity.this);
+//                } else {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
         List<CalendarEvent> celist2 = new ArrayList<CalendarEvent>();
         celist2.add(CalendarService.createEvent("MathTutorial", 2015, 1, 19, 9, 30, 2015, 1, 19, 10, 20));
@@ -117,18 +121,18 @@ public class MainActivity extends OTActivity
 
 
 
-        sample_user2.signUpInBackground();
-
-        sample_user2.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    ToTo.show("save success", MainActivity.this);
-                } else {
-                    e.printStackTrace();
-                }
-            }
-        });
+//        sample_user2.signUpInBackground();
+//
+//        sample_user2.saveInBackground(new SaveCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                if (e == null) {
+//                    ToTo.show("save success", MainActivity.this);
+//                } else {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
         List<CalendarEvent> celist3 = new ArrayList<CalendarEvent>();
         celist3.add(CalendarService.createEvent("TEMG", 2015, 1, 19, 16, 30, 2015, 1, 19, 17, 20));
@@ -143,18 +147,38 @@ public class MainActivity extends OTActivity
         sample_user3.setPassword("sample_password3");
         sample_user3.setEmail("sample_user3@gmail.com");
 
-        sample_user3.signUpInBackground();
+//        sample_user3.signUpInBackground();
 
-        sample_user3.saveInBackground(new SaveCallback() {
+//        sample_user3.saveInBackground(new SaveCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                if (e == null) {
+//                    ToTo.show("save success", MainActivity.this);
+//                } else {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+
+        List<String> permissions = Arrays.asList("public_profile", "user_friends", "user_about_me",
+                "user_relationships", "user_birthday", "user_location");
+        ParseFacebookUtils.logIn(permissions, this, new LogInCallback() {
             @Override
-            public void done(ParseException e) {
+            public void done(ParseUser parseUser, ParseException e) {
                 if (e == null) {
-                    ToTo.show("save success", MainActivity.this);
+                    if (parseUser != null) {
+                        Log.d(TAG, "ParseUser with Facebook: "+ parseUser.getUsername());
+                    } else if (parseUser.isNew()) {
+                        Log.d(TAG, "ParseUser with Facebook: "+ parseUser.getUsername() + "is new");
+                    } else {
+                        Log.e(TAG, "Facebook login error");
+                    }
                 } else {
                     e.printStackTrace();
                 }
             }
         });
+
 
 
     }
