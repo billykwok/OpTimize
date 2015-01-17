@@ -3,7 +3,6 @@ package com.optimize.optimize.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +13,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.optimize.optimize.tasks.GetOptimumTimeSlotsTask;
 import com.optimize.optimize.EventTimeType;
 import com.optimize.optimize.R;
 import com.optimize.optimize.WithInType;
+import com.optimize.optimize.activities.OTEventManager;
 import com.optimize.optimize.adapters.AddParticipantsAdapter;
 import com.optimize.optimize.calendar.CalendarManager;
-import com.optimize.optimize.calendar.TimeSlot;
 import com.optimize.optimize.utilities.FastToast;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -29,7 +29,6 @@ import com.parse.ParseUser;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -147,10 +146,15 @@ public class AddParticipantFragment extends OTFragment {
 
     @OnClick(R.id.btnCompare)
     void onBtnCompareClicked() {
-        List<TimeSlot> timeSlots = CalendarManager.getOptimumTimeSlots(parseUsers,null, 3* DateUtils.HOUR_IN_MILLIS, cm.getStartHour(), cm.getEndHour(), new Date().getTime(), (new Date().getTime()+30*DateUtils.DAY_IN_MILLIS), 3);
-        for (TimeSlot timeSlot: timeSlots) {
-            Log.d(TAG, timeSlot.toString());
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OTEventManager om = OTEventManager.getInstance();
+                om.setParseUserList(parseUsers);
+
+                new GetOptimumTimeSlotsTask().execute();
+            }
+        }).start();
     }
 
     private ArrayList<String> getWithInType() {
