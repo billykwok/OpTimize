@@ -114,27 +114,22 @@ public class MainActivity extends OTActionBarActivity {
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-//        List<String> permissions = Arrays.asList("public_profile", "user_friends", "user_about_me",
-//                "user_relationships", "user_birthday", "user_location");
-//        ParseFacebookUtils.logIn(permissions, this, new LogInCallback() {
-//            @Override
-//            public void done(ParseUser parseUser, ParseException e) {
-//                if (e == null) {
-//                    if (parseUser != null) {
-//                        Log.d(TAG, "ParseUser with Facebook: "+ parseUser.getUsername());
-//                    } else if (parseUser.isNew()) {
-//                        Log.d(TAG, "ParseUser with Facebook: "+ parseUser.getUsername() + "is new");
-//                    } else {
-//                        Log.e(TAG, "Facebook login error");
-//                    }
-//                    FastToast.show("save success", MainActivity.this);
-//                } else {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                // openSearch();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 
 }
