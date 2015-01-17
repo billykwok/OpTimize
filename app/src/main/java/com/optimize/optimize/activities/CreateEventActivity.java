@@ -19,6 +19,7 @@ import com.optimize.optimize.calendar.CalendarEvent;
 import com.optimize.optimize.calendar.CalendarService;
 import com.optimize.optimize.calendar.TimeSlot;
 import com.optimize.optimize.models.OTEvent;
+import com.optimize.optimize.models.Participant;
 import com.optimize.optimize.utilities.FastToast;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -74,10 +75,11 @@ public class CreateEventActivity extends OTActionBarActivity {
 
         //Test case
         List<CalendarEvent> ce;
-        ce = CalendarService.getEventList(getBaseContext(), CalendarService.getCalendarIdList(getBaseContext()));
+        ce = CalendarService.getEventList(getBaseContext());
         possibleTimeSlot.add(new TimeSlot(ce.get(0).getBegin(), ce.get(0).getEnd()));
 
-        // List<TimeSlot> possibleTimeSlot = ot().getPossibleTimeSlots();
+        // List<TimeSlot> possibleTimeSlot = OTEventManager.getInstance().getPossibleTimeSlot();
+
         ArrayAdapter<TimeSlot> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_spinner_item, possibleTimeSlot);
         spEventTimeSlot.setAdapter(adapter);
         btnCreateEvent.setOnClickListener(new OnClickListener() {
@@ -104,7 +106,18 @@ public class CreateEventActivity extends OTActionBarActivity {
                                 //TODO add otEventId to otEventsId in Parse user
                                 JSONArray otEventIdList = parseUser.getJSONArray("otEventsId");
                                 otEventIdList.put(otEventId);
+                                parseUser.put("otEventsId", otEventIdList);
+                                parseUser.saveInBackground(new SaveCallback(){
+                                    @Override
+                                    public void done(ParseException e) {
+                                        if(e == null) {
+                                            FastToast.show("save success", getApplicationContext());
+                                        }
+                                    }
+                                });
                             }
+                            List<Participant> participantList = Participant.fromParseUsers(users);
+                            otEvent.setParticipants(participantList);
                         }
                     }
                 });
