@@ -1,7 +1,13 @@
 package com.optimize.optimize.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +21,8 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,8 +51,22 @@ public class LoginActivity extends OTActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
+//        showHashKey(this);
     }
 
+//    public void showHashKey(Context context) {
+//        try {
+//            PackageInfo info = context.getPackageManager().getPackageInfo(
+//                    "com.optimize.optimize", PackageManager.GET_SIGNATURES); //Your            package name here
+//            for (Signature signature : info.signatures) {
+//                MessageDigest md = MessageDigest.getInstance("SHA");
+//                md.update(signature.toByteArray());
+//                Log.i("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+//            }
+//        } catch (PackageManager.NameNotFoundException e) {
+//        } catch (NoSuchAlgorithmException e) {
+//        }
+//    }
     private boolean isEmailValid() {
         return actxtEmail.getText().toString().trim().contains("@");
     }
