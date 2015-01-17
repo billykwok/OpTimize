@@ -78,7 +78,7 @@ public class CalendarService{
         return id;
     }
 
-    public static List<CalendarEvent> getEventList(Context context, List<String> ids) {
+    private static List<CalendarEvent> getEventList(Context context, List<String> ids) {
 
         String[] eventProjection = new String[]{
                 CalendarContract.Events.TITLE,
@@ -117,6 +117,10 @@ public class CalendarService{
             Log.i("Event List","Not Empty Event List");
 
         return eventList;
+    }
+
+    public static List<CalendarEvent> getEventList(Context context) {
+        return getEventList(context, getCalendarIdList(context));
     }
 
 
