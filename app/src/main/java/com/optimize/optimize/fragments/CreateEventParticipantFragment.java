@@ -1,9 +1,13 @@
-package com.optimize.optimize.activities;
+package com.optimize.optimize.fragments;
 
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,9 +38,9 @@ import butterknife.OnClick;
 import butterknife.OnItemSelected;
 
 /**
- * A simple {@link android.app.Fragment} subclass.
+ * A simple {@link Fragment} subclass.
  */
-public class AddParticipantActivity extends OTActionBarActivity {
+public class CreateEventParticipantFragment extends OTFragment {
 
     @InjectView(R.id.btnStart)
     Button btnStart;
@@ -70,18 +74,24 @@ public class AddParticipantActivity extends OTActionBarActivity {
     private int[] withinTypeRes = {R.string.within_day, R.string.within_week, R.string.within_month};
 
 
+    public CreateEventParticipantFragment() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_participant);
-        ButterKnife.inject(this);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.activity_add_participant, container, false);
+        ButterKnife.inject(this, view);
         cm = CalendarManager.getInstance();
         parseUsers = new ArrayList<>();
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getWithInType());
+        arrayAdapter = new ArrayAdapter<String>(ot(), android.R.layout.simple_spinner_item, getWithInType());
         spinnerWithin.setAdapter(arrayAdapter);
-        addParticipantsAdapter = new AddParticipantsAdapter(this, parseUsers);
+        addParticipantsAdapter = new AddParticipantsAdapter(ot(), parseUsers);
         lsParticipants.setAdapter(addParticipantsAdapter);
-
+        return view;
     }
 
     @OnItemSelected(R.id.spinnerWithin)
@@ -104,11 +114,11 @@ public class AddParticipantActivity extends OTActionBarActivity {
         String username = etxtFindUser.getText().toString().trim();
         ParseQuery<ParseUser> userParseQuery = ParseQuery.getQuery(ParseUser.class);
         userParseQuery.whereEqualTo("username", username);
-        blockForApi();
+        ot().blockForApi();
         userParseQuery.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> parseUsers, ParseException e) {
-                dismissBlockForApi();
+                ot().dismissBlockForApi();
                 if (parseUsers.size() > 0) {
                     JSONArray j = parseUsers.get(0).getJSONArray("calendarEvents");
                     if (j != null) {
@@ -116,10 +126,10 @@ public class AddParticipantActivity extends OTActionBarActivity {
                     } else {
                         Log.e(TAG, "null array");
                     }
-                    AddParticipantActivity.this.parseUsers.addAll(parseUsers);
-                    AddParticipantActivity.this.addParticipantsAdapter.notifyDataSetChanged();
+                    CreateEventParticipantFragment.this.parseUsers.addAll(parseUsers);
+                    CreateEventParticipantFragment.this.addParticipantsAdapter.notifyDataSetChanged();
                 } else {
-                    FastToast.show(R.string.no_such_user, AddParticipantActivity.this);
+                    FastToast.show(R.string.no_such_user, ot());
                 }
             }
         });
@@ -127,12 +137,12 @@ public class AddParticipantActivity extends OTActionBarActivity {
 
     @OnClick(R.id.btnStart)
     void onBtnStartClicked() {
-        showTimePickerDialog(EventTimeType.Start);
+        ot().showTimePickerDialog(EventTimeType.Start);
     }
 
     @OnClick(R.id.btnEnd)
     void onBtnEndClicked() {
-        showTimePickerDialog(EventTimeType.End);
+        ot().showTimePickerDialog(EventTimeType.End);
     }
 
     @OnClick(R.id.btnCompare)
