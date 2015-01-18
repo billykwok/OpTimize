@@ -5,14 +5,20 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.Request;
+import com.facebook.widget.ProfilePictureView;
 import com.optimize.optimize.R;
 
-public class TestActivity extends ActionBarActivity {
+public class TestActivity extends OTActionBarActivity {
+
+    ProfilePictureView profilePictureView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+        profilePictureView = (ProfilePictureView) findViewById(R.id.selection_profile_pic);
+        Request newMeRequest
     }
 
 
