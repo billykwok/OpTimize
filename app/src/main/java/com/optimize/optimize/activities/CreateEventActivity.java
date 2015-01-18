@@ -95,32 +95,37 @@ public class CreateEventActivity extends OTActionBarActivity {
                 TimeSlot timeSlot = (TimeSlot) spEventTimeSlot.getSelectedItem();
                 Log.i("Results", "Title: " + name + "Des: " + description + "Time: " + time);
 
-                final OTEvent otEvent = new OTEvent(name, timeSlot.getStart(), timeSlot.getEnd(), description, location);
-                otEvent.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if(e == null) {
-                            List<ParseUser> users = CreateEventActivity.this.getParseUsers();
-                            String otEventId = otEvent.getObjectId();
-                            for(ParseUser parseUser : users) {
-                                //TODO add otEventId to otEventsId in Parse user
-                                JSONArray otEventIdList = parseUser.getJSONArray("otEventsId");
-                                otEventIdList.put(otEventId);
-                                parseUser.put("otEventsId", otEventIdList);
-                                parseUser.saveInBackground(new SaveCallback(){
-                                    @Override
-                                    public void done(ParseException e) {
-                                        if(e == null) {
-                                            FastToast.show("save success", getApplicationContext());
+                ParseUser current = ParseUser.getCurrentUser();
+
+                if(current != null) {
+                    final OTEvent otEvent = new OTEvent(name, timeSlot.getStart(), timeSlot.getEnd(), description, location);
+                    otEvent.setHostId(current.getObjectId());
+                    otEvent.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                List<ParseUser> users = CreateEventActivity.this.getParseUsers();
+                                String otEventId = otEvent.getObjectId();
+                                for (ParseUser parseUser : users) {
+                                    //TODO add otEventId to otEventsId in Parse user
+                                    JSONArray otEventIdList = parseUser.getJSONArray("otEventsId");
+                                    otEventIdList.put(otEventId);
+                                    parseUser.put("otEventsId", otEventIdList);
+                                    parseUser.saveInBackground(new SaveCallback() {
+                                        @Override
+                                        public void done(ParseException e) {
+                                            if (e == null) {
+                                                FastToast.show("save success", getApplicationContext());
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                                }
+                                List<Participant> participantList = Participant.fromParseUsers(users);
+                                otEvent.setParticipants(participantList);
                             }
-                            List<Participant> participantList = Participant.fromParseUsers(users);
-                            otEvent.setParticipants(participantList);
                         }
-                    }
-                });
+                    });
+                }
 
                 CalendarService.exportEvent(getBaseContext(),
                         new CalendarEvent(name,

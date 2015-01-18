@@ -148,9 +148,11 @@ public class CalendarManager {
         if (n > possibleTimeSlots.size())
             possibleEventTime = possibleTimeSlots;
 
+
         for (int i = 0; i < n; ++i) {
             possibleEventTime.add(possibleTimeSlots.get(i));
         }
+
         return possibleEventTime;
     }
 }
