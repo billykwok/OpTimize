@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +17,9 @@ import com.optimize.optimize.R;
 import com.optimize.optimize.calendar.CalendarEvent;
 import com.optimize.optimize.calendar.CalendarService;
 import com.optimize.optimize.fragments.EventListFragment;
+import com.optimize.optimize.models.OTEvent;
 import com.optimize.optimize.models.OTUserService;
+import com.optimize.optimize.models.Participant;
 import com.parse.LogInCallback;
 import com.optimize.optimize.utilities.FastToast;
 import com.parse.ParseException;
@@ -51,6 +54,8 @@ public class MainActivity extends OTActionBarActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
+        testCase();
+
         // Toolbar
         setTitle("Events");
         setSupportActionBar(toolbar);
@@ -83,6 +88,7 @@ public class MainActivity extends OTActionBarActivity {
                     }
                 }
             }
+
         });
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +135,48 @@ public class MainActivity extends OTActionBarActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void testCase(){
+        List<CalendarEvent> celist2 = new ArrayList<CalendarEvent>();
+        celist2.add(CalendarService.createEvent("sample_event", 2015, 1, 22, 9, 30, 2015, 1, 5, 10, 20));
+
+
+        final ParseUser sample_user4 = new ParseUser();
+
+        OTUserService.setEventList(celist2, sample_user4);
+        sample_user4.setUsername("sample_user_name4");
+        sample_user4.setPassword("sample_password4");
+        sample_user4.setEmail("sample_user4@gmail.com");
+        String id = null;
+
+//        sample_user4.signUpInBackground(new SaveCallback() {
+//            @Override
+//            public void done(ParseException e){
+//                if (e == null){
+//                    id = sample_user4.getObjectId();
+//                }
+//            }
+//        });
+
+        sample_user4.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    FastToast.show("save success", MainActivity.this);
+                } else {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        for(CalendarEvent ce : celist2){
+            final OTEvent otEvent = new OTEvent(ce.getTitle(), ce.getBegin(), ce.getEnd(), "My home", "Description sample");
+            Log.i("Test", sample_user4.getObjectId());
+            otEvent.setHostId(sample_user4.getObjectId());
+            otEvent.saveInBackground(null);
+        }
+
     }
 
 
