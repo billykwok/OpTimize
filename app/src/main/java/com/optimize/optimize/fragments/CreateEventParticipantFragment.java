@@ -1,7 +1,5 @@
 package com.optimize.optimize.fragments;
 
-
-import android.app.Fragment;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -37,9 +35,6 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class CreateEventParticipantFragment extends OTFragment {
 
     @InjectView(R.id.btnStart)
@@ -67,23 +62,15 @@ public class CreateEventParticipantFragment extends OTFragment {
 
     List<ParseUser> parseUsers;
 
-
-
     ArrayAdapter<String> arrayAdapter;
     AddParticipantsAdapter addParticipantsAdapter;
     private int[] withinTypeRes = {R.string.within_day, R.string.within_week, R.string.within_month};
-
-
-    public CreateEventParticipantFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.activity_add_participant, container, false);
+        View view = inflater.inflate(R.layout.fragment_create_event_participant, container, false);
         ButterKnife.inject(this, view);
         cm = CalendarManager.getInstance();
         parseUsers = new ArrayList<>();

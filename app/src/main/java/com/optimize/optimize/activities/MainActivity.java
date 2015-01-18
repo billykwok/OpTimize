@@ -100,7 +100,7 @@ public class MainActivity extends OTActionBarActivity {
             @Override
             public void onClick(View v) {
                 FastToast.show("Hi", MainActivity.this);
-                startActivity(AddParticipantActivity.class);
+                startActivity(CreateEventActivity.class);
             }
         });
 
@@ -130,6 +130,5 @@ public class MainActivity extends OTActionBarActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 }

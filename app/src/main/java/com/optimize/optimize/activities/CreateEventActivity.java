@@ -1,6 +1,5 @@
 package com.optimize.optimize.activities;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -11,9 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.balysv.materialmenu.MaterialMenuDrawable;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonPrimitive;
 import com.optimize.optimize.R;
 import com.optimize.optimize.calendar.CalendarEvent;
 import com.optimize.optimize.calendar.CalendarService;
