@@ -39,7 +39,7 @@ public class CreateEventActivity extends OTActionBarActivity {
         // Load create event step 1
         CreateEventTimeFragment newFragment = new CreateEventTimeFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.addToBackStack("Create Event Step 1").replace(R.id.container, newFragment).commit();
+        transaction.disallowAddToBackStack().replace(R.id.container, newFragment).commit();
 
     }
 

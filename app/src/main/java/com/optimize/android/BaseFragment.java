@@ -111,6 +111,14 @@ public abstract class BaseFragment extends Fragment {
         return getActivity().getBaseContext();
     }
 
+    protected void setActivityTitle(String title) {
+        getActivity().setTitle(title);
+    }
+
+    protected CharSequence getActivityTitle() {
+        return getActivity().getTitle();
+    }
+
     protected Context getApplicationContext() {
         return getActivity().getApplicationContext();
     }
