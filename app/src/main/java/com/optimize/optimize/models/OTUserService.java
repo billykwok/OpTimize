@@ -22,6 +22,7 @@ public class OTUserService {
 
 
     static final String TAG = "OTUserService";
+    public static final  String CALENDAR_EVENTS = "calendarEvents";
 
     public OTUserService() {
     }
