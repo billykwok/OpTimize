@@ -21,14 +21,13 @@ import com.optimize.optimize.models.OTEvent;
 import com.optimize.optimize.models.OTUserService;
 import com.optimize.optimize.models.Participant;
 import com.parse.LogInCallback;
+import com.optimize.optimize.tasks.GetCalendarEventTask;
 import com.optimize.optimize.utilities.FastToast;
-import com.parse.ParseException;
-import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -73,10 +72,14 @@ public class MainActivity extends OTActionBarActivity {
             }
 
             @Override
-            public void onDrawerOpened(View drawerView) { isDrawerOpened = true; }
+            public void onDrawerOpened(View drawerView) {
+                isDrawerOpened = true;
+            }
 
             @Override
-            public void onDrawerClosed(View drawerView) { isDrawerOpened = false; }
+            public void onDrawerClosed(View drawerView) {
+                isDrawerOpened = false;
+            }
 
             @Override
             public void onDrawerStateChanged(int newState) {
@@ -106,7 +109,7 @@ public class MainActivity extends OTActionBarActivity {
             @Override
             public void onClick(View v) {
                 FastToast.show("Hi", MainActivity.this);
-                startActivity(AddParticipantActivity.class);
+                startActivity(CreateEventActivity.class);
             }
         });
 
@@ -115,10 +118,11 @@ public class MainActivity extends OTActionBarActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.disallowAddToBackStack().replace(R.id.container, newFragment).commit();
 
+        new GetCalendarEventTask().execute(this);
+
         // Test Event
         // testMe();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -136,6 +140,7 @@ public class MainActivity extends OTActionBarActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
     private void testCase(){
         List<CalendarEvent> celist2 = new ArrayList<CalendarEvent>();
@@ -161,7 +166,7 @@ public class MainActivity extends OTActionBarActivity {
 
         sample_user4.saveInBackground(new SaveCallback() {
             @Override
-            public void done(ParseException e) {
+            public void done(com.parse.ParseException e) {
                 if (e == null) {
                     FastToast.show("save success", MainActivity.this);
                 } else {
@@ -178,6 +183,4 @@ public class MainActivity extends OTActionBarActivity {
         }
 
     }
-
-
 }

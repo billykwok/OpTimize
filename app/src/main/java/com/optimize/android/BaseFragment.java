@@ -1,6 +1,7 @@
 package com.optimize.android;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -105,5 +106,25 @@ public abstract class BaseFragment extends Fragment {
 		Activity activity = getActivity();
 		return cls.isInstance(activity) ? cls.cast(activity) : null;
 	}
+
+    protected Context getBaseContext() {
+        return getActivity().getBaseContext();
+    }
+
+    protected void setActivityTitle(String title) {
+        getActivity().setTitle(title);
+    }
+
+    protected CharSequence getActivityTitle() {
+        return getActivity().getTitle();
+    }
+
+    protected Context getApplicationContext() {
+        return getActivity().getApplicationContext();
+    }
+
+    protected void finishActivity() {
+        getActivity().finish();
+    }
 
 }
