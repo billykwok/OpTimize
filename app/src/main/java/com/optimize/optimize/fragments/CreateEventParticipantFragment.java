@@ -73,15 +73,15 @@ public class CreateEventParticipantFragment extends OTFragment {
         ButterKnife.inject(this, view);
         cm = CalendarManager.getInstance();
         parseUsers = new ArrayList<>();
-        arrayAdapter = new ArrayAdapter<String>(ot(), android.R.layout.simple_spinner_item, getWithInType());
+        arrayAdapter = new ArrayAdapter<String>(getOTActionBarActivity(), android.R.layout.simple_spinner_item, getWithInType());
         spinnerWithin.setAdapter(arrayAdapter);
-        addParticipantsAdapter = new AddParticipantsAdapter(ot(), parseUsers);
+        addParticipantsAdapter = new AddParticipantsAdapter(getOTActionBarActivity(), parseUsers);
         lsParticipants.setAdapter(addParticipantsAdapter);
         return view;
     }
 
     @OnItemSelected(R.id.spinnerWithin)
-    void onSpinnerWithinClicked(int position) {
+    void onSpinnerWithinSelected(int position) {
         switch (position) {
             case 0:
                 cm.setWithIn(WithInType.Day);
@@ -100,11 +100,11 @@ public class CreateEventParticipantFragment extends OTFragment {
         String username = etxtFindUser.getText().toString().trim();
         ParseQuery<ParseUser> userParseQuery = ParseQuery.getQuery(ParseUser.class);
         userParseQuery.whereEqualTo("username", username);
-        ot().blockForApi();
+        getOTActionBarActivity().blockForApi();
         userParseQuery.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> parseUsers, ParseException e) {
-                ot().dismissBlockForApi();
+                getOTActionBarActivity().dismissBlockForApi();
                 if (parseUsers.size() > 0) {
                     JSONArray j = parseUsers.get(0).getJSONArray("calendarEvents");
                     if (j != null) {
@@ -115,7 +115,7 @@ public class CreateEventParticipantFragment extends OTFragment {
                     CreateEventParticipantFragment.this.parseUsers.addAll(parseUsers);
                     CreateEventParticipantFragment.this.addParticipantsAdapter.notifyDataSetChanged();
                 } else {
-                    FastToast.show(R.string.no_such_user, ot());
+                    FastToast.show(R.string.no_such_user, getOTActionBarActivity());
                 }
             }
         });
@@ -123,12 +123,12 @@ public class CreateEventParticipantFragment extends OTFragment {
 
     @OnClick(R.id.btnStart)
     void onBtnStartClicked() {
-        ot().showTimePickerDialog(EventTimeType.Start);
+        getOTActionBarActivity().showTimePickerDialog(EventTimeType.Start);
     }
 
     @OnClick(R.id.btnEnd)
     void onBtnEndClicked() {
-        ot().showTimePickerDialog(EventTimeType.End);
+        getOTActionBarActivity().showTimePickerDialog(EventTimeType.End);
     }
 
     @OnClick(R.id.btnCompare)

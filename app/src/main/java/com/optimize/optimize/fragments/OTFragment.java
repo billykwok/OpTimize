@@ -11,9 +11,6 @@ import com.optimize.android.BaseFragment;
 import com.optimize.optimize.R;
 import com.optimize.optimize.activities.OTActionBarActivity;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class OTFragment extends BaseFragment {
 
     final String TAG = "OTFragment";
@@ -28,7 +25,7 @@ public class OTFragment extends BaseFragment {
         return textView;
     }
 
-    public OTActionBarActivity ot(){
+    public OTActionBarActivity getOTActionBarActivity() {
         return (OTActionBarActivity) getActivity();
     }
 

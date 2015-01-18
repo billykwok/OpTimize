@@ -1,16 +1,10 @@
 package com.optimize.optimize.activities;
 
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,9 +16,6 @@ import com.optimize.optimize.R;
 import com.optimize.optimize.fragments.EventListFragment;
 import com.optimize.optimize.tasks.GetCalendarEventTask;
 import com.optimize.optimize.utilities.FastToast;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -43,12 +34,12 @@ public class MainActivity extends OTActionBarActivity {
     MaterialMenuDrawable btnMaterialMenu;
     boolean isDrawerOpened;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
+
         // Toolbar
         setTitle("Events");
         setSupportActionBar(toolbar);
