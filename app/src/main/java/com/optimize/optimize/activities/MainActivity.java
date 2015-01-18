@@ -25,6 +25,7 @@ import com.optimize.optimize.tasks.GetCalendarEventTask;
 import com.optimize.optimize.utilities.FastToast;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.parse.SignUpCallback;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -46,6 +47,8 @@ public class MainActivity extends OTActionBarActivity {
 
     MaterialMenuDrawable btnMaterialMenu;
     boolean isDrawerOpened;
+
+    ParseUser sample_user4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,11 +146,11 @@ public class MainActivity extends OTActionBarActivity {
 
 
     private void testCase(){
-        List<CalendarEvent> celist2 = new ArrayList<CalendarEvent>();
+        final List<CalendarEvent> celist2 = new ArrayList<CalendarEvent>();
         celist2.add(CalendarService.createEvent("sample_event", 2015, 1, 22, 9, 30, 2015, 1, 5, 10, 20));
 
 
-        final ParseUser sample_user4 = new ParseUser();
+        sample_user4 = new ParseUser();
 
         OTUserService.setEventList(celist2, sample_user4);
         sample_user4.setUsername("sample_user_name4");
@@ -155,32 +158,38 @@ public class MainActivity extends OTActionBarActivity {
         sample_user4.setEmail("sample_user4@gmail.com");
         String id = null;
 
-//        sample_user4.signUpInBackground(new SaveCallback() {
-//            @Override
-//            public void done(ParseException e){
-//                if (e == null){
-//                    id = sample_user4.getObjectId();
-//                }
-//            }
-//        });
-
-        sample_user4.saveInBackground(new SaveCallback() {
+        sample_user4.signUpInBackground(new SignUpCallback() {
             @Override
             public void done(com.parse.ParseException e) {
-                if (e == null) {
-                    FastToast.show("save success", MainActivity.this);
+                if (e != null) {
+                    sample_user4 = ParseUser.getCurrentUser();
+                    testCaseAddIdToEvent(celist2);
                 } else {
                     e.printStackTrace();
                 }
+
             }
         });
 
+
+//        sample_user4.saveInBackground(new SaveCallback() {
+//            @Override
+//            public void done(com.parse.ParseException e) {
+//                if (e == null) {
+//                    FastToast.show("save success", MainActivity.this);
+//                } else {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+    }
+
+    public void testCaseAddIdToEvent(List<CalendarEvent> celist2) {
         for(CalendarEvent ce : celist2){
-            final OTEvent otEvent = new OTEvent(ce.getTitle(), ce.getBegin(), ce.getEnd(), "My home", "Description sample");
+            OTEvent otEvent = new OTEvent(ce.getTitle(), ce.getBegin(), ce.getEnd(), "My home", "Description sample");
             Log.i("Test", sample_user4.getObjectId());
             otEvent.setHostId(sample_user4.getObjectId());
             otEvent.saveInBackground(null);
         }
-
     }
 }

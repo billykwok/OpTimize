@@ -24,8 +24,7 @@
     <string name="no_such_user">No such user.</string>
     <string name="title_activity_test_create_fragment">TestCreateFragment</string>
     <string name="title_activity_splash">SplashActivity</string>
-
-
     <string name="facebook_app_id">787427407999012</string>
+    <string name="title_activity_test">TestActivity</string>
 
 </resources>
