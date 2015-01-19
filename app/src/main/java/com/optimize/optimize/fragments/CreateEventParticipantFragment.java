@@ -105,6 +105,7 @@ public class CreateEventParticipantFragment extends OTFragment {
                 new GetOptimumTimeSlotsTask().execute();
             }
         }).start();
+
     }
 
 }

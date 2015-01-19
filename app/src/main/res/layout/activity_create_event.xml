@@ -16,8 +16,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp">
+        android:layout_height="50dp"
+        android:padding="5dp"
+        android:background="@color/grey_super_light">
 
         <ImageButton
             android:id="@+id/btn_prev_step"
@@ -72,9 +73,14 @@
 
     </RelativeLayout>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/grey_light"/>
+
     <com.optimize.android.widget.BetterViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
