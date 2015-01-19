@@ -4,6 +4,8 @@
     <color name="ot_red_dark">#D03215</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="grey_super_light">#EAEAEA</color>
+    <color name="grey_light">#DFDFDF</color>
 
     <color name="ot_green">#00AF9F</color>
     <color name="ot_blue">#007DC8</color>

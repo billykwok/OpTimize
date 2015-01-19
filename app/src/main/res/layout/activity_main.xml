@@ -48,7 +48,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         fab:fab_plusIconColor="@color/white"
-        fab:fab_colorNormal="@color/ot_red_light"
+        fab:fab_colorNormal="@color/ot_red_dark"
         fab:fab_colorPressed="@color/ot_red_dark"/>
 
 </RelativeLayout>

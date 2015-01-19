@@ -36,12 +36,6 @@ import butterknife.OnItemSelected;
 
 public class CreateEventParticipantFragment extends OTFragment {
 
-    @InjectView(R.id.btnStart)
-    Button btnStart;
-
-    @InjectView(R.id.btnEnd)
-    Button btnEnd;
-
     @InjectView(R.id.btnFind)
     Button btnFind;
 
@@ -51,10 +45,7 @@ public class CreateEventParticipantFragment extends OTFragment {
     @InjectView(R.id.lsParticipants)
     ListView lsParticipants;
 
-    @InjectView(R.id.spinnerWithin)
-    Spinner spinnerWithin;
-
-    @InjectView(R.id.btnCompare)
+    @InjectView(R.id.btn_compare)
     Button btnCompare;
 
     CalendarManager cm;
@@ -63,7 +54,6 @@ public class CreateEventParticipantFragment extends OTFragment {
 
     ArrayAdapter<String> arrayAdapter;
     AddParticipantsAdapter addParticipantsAdapter;
-    private int[] withinTypeRes = {R.string.within_day, R.string.within_week, R.string.within_month};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,26 +63,9 @@ public class CreateEventParticipantFragment extends OTFragment {
         ButterKnife.inject(this, view);
         cm = CalendarManager.getInstance();
         parseUsers = new ArrayList<>();
-        arrayAdapter = new ArrayAdapter<String>(getOTActionBarActivity(), android.R.layout.simple_spinner_item, getWithInType());
-        spinnerWithin.setAdapter(arrayAdapter);
         addParticipantsAdapter = new AddParticipantsAdapter(getOTActionBarActivity(), parseUsers);
         lsParticipants.setAdapter(addParticipantsAdapter);
         return view;
-    }
-
-    @OnItemSelected(R.id.spinnerWithin)
-    void onSpinnerWithinSelected(int position) {
-        switch (position) {
-            case 0:
-                cm.setWithIn(WithInType.Day);
-                return;
-            case 1:
-                cm.setWithIn(WithInType.Week);
-                return;
-            case 2:
-                cm.setWithIn(WithInType.Month);
-                return;
-        }
     }
 
     @OnClick(R.id.btnFind)
@@ -121,17 +94,7 @@ public class CreateEventParticipantFragment extends OTFragment {
         });
     }
 
-    @OnClick(R.id.btnStart)
-    void onBtnStartClicked() {
-        getOTActionBarActivity().showTimePickerDialog(EventTimeType.Start);
-    }
-
-    @OnClick(R.id.btnEnd)
-    void onBtnEndClicked() {
-        getOTActionBarActivity().showTimePickerDialog(EventTimeType.End);
-    }
-
-    @OnClick(R.id.btnCompare)
+    @OnClick(R.id.btn_compare)
     void onBtnCompareClicked() {
         new Thread(new Runnable() {
             @Override
@@ -142,15 +105,7 @@ public class CreateEventParticipantFragment extends OTFragment {
                 new GetOptimumTimeSlotsTask().execute();
             }
         }).start();
-    }
 
-    private ArrayList<String> getWithInType() {
-        ArrayList<String> withType = new ArrayList<>();
-        for (int i = 0; i < withinTypeRes.length; i++) {
-            withType.add(getString(withinTypeRes[i]));
-        }
-        return withType;
     }
-
 
 }

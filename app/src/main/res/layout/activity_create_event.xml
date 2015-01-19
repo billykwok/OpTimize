@@ -14,25 +14,72 @@
         android:minHeight="?attr/actionBarSize"
         android:background="@color/ot_red_dark"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="50dp"
+        android:padding="5dp"
+        android:background="@color/grey_super_light">
 
         <ImageButton
+            android:id="@+id/btn_prev_step"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:src="@drawable/ic_arrow_back_white_24dp"
-            android:background="@color/ot_red_dark"/>
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/ic_keyboard_arrow_left_red_48dp"
+            android:background="@android:color/transparent"/>
 
-        <TextView
+        <RadioGroup
+            android:id="@+id/rg_step"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_step_1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:button="@android:color/transparent"
+                android:background="@drawable/selector_step_1"/>
+
+            <RadioButton
+                android:id="@+id/rb_step_2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:button="@android:color/transparent"
+                android:background="@drawable/selector_step_2"/>
+
+            <RadioButton
+                android:id="@+id/rb_step_3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:button="@android:color/transparent"
+                android:background="@drawable/selector_step_3"/>
+
+        </RadioGroup>
+
+        <ImageButton
+            android:id="@+id/btn_next_step"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_keyboard_arrow_right_red_48dp"
+            android:background="@android:color/transparent"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/container"
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/grey_light"/>
+
+    <com.optimize.android.widget.BetterViewPager
+        android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

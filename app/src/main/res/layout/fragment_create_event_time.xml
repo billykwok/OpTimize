@@ -1,8 +1,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
+             tools:context="com.optimize.optimize.fragments.CreateEventTimeFragment"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.optimize.optimize.fragments.CreateEventTimeFragment">
+             android:layout_gravity="center_horizontal"
+             android:scrollbars="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +15,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:text="Available Range of Dates"
             android:textColor="@color/black"/>
@@ -21,31 +22,39 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <EditText
+            <TextView
+                android:id="@+id/tv_starting_date"
                 android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:layout_height="35dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textSize="16sp"
                 android:singleLine="true"
-                android:hint="Starting Date"/>
+                android:hint="Starting Date"
+                android:background="@color/grey_light"/>
 
             <TextView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:text="to"
                 android:textColor="@color/white"
+                android:textAllCaps="true"
                 android:gravity="center"
                 android:background="@color/ot_red_dark"/>
 
-            <EditText
+            <TextView
+                android:id="@+id/tv_ending_date"
                 android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:layout_height="35dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textSize="16sp"
                 android:singleLine="true"
-                android:hint="Ending Date"/>
+                android:hint="Ending Date"
+                android:background="@color/grey_light"/>
 
         </LinearLayout>
         
@@ -64,29 +73,39 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <EditText
+            <TextView
+                android:id="@+id/tv_starting_time"
                 android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:hint="Starting Time"/>
+                android:layout_height="35dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:singleLine="true"
+                android:hint="Starting Time"
+                android:background="@color/grey_light"/>
 
             <TextView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:text="to"
                 android:textColor="@color/white"
+                android:textAllCaps="true"
                 android:gravity="center"
                 android:background="@color/ot_red_dark"/>
 
-            <EditText
+            <TextView
+                android:id="@+id/tv_ending_time"
                 android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:hint="Starting Time"/>
+                android:layout_height="35dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:singleLine="true"
+                android:hint="Ending Time"
+                android:background="@color/grey_light"/>
 
         </LinearLayout>
 
@@ -102,9 +121,19 @@
             android:text="Duration of Event"
             android:textColor="@color/black"/>
 
-        <EditText
-            android:layout_width="320dp"
-            android:layout_height="30dp"/>
+        <TextView
+            android:id="@+id/tv_duration"
+            android:layout_width="314dp"
+            android:layout_height="35dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingRight="10dp"
+            android:layout_gravity="center"
+            android:gravity="left|center_vertical"
+            android:textSize="16sp"
+            android:hint="Duration"
+            android:background="@color/grey_light"/>
 
     </LinearLayout>
 
