@@ -2,16 +2,22 @@ package com.optimize.optimize.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.model.GraphUser;
 import com.optimize.optimize.R;
 import com.optimize.optimize.utilities.FastToast;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 import java.util.Arrays;
@@ -120,8 +126,35 @@ public class LoginActivity extends OTActionBarActivity {
             FastToast.show("No such user", this);
             return;
         }
-        afterSigIn(e);
+        if (e == null) {
+            getFacebookId(parseUser);
+        } else {
+            e.printStackTrace();
+        }
     }
+
+    void getFacebookId(final ParseUser parseUser) {
+        Request request = Request.newMeRequest(ParseFacebookUtils.getSession(), new Request.GraphUserCallback() {
+            @Override
+            public void onCompleted(GraphUser graphUser, Response response) {
+                if (graphUser != null) {
+                    if (parseUser.get("facebookId") == null) {
+                        parseUser.put("facebookId", graphUser.getId());
+                    }
+                }
+                parseUser.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        Log.e(TAG, "save facebook id success");
+                        afterSigIn(e);
+                    }
+                });
+            }
+        });
+        request.executeAsync();
+    }
+
+
 
     void afterSigIn(ParseException e) {
         if (e == null) {

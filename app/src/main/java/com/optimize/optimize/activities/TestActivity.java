@@ -18,7 +18,7 @@ public class TestActivity extends OTActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         profilePictureView = (ProfilePictureView) findViewById(R.id.selection_profile_pic);
-        Request newMeRequest
+
     }
 
 
