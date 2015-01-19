@@ -5,12 +5,33 @@ import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
  * Created by samwalker on 22/12/14.
  */
 public class DateUtils {
+
+    public static int getCurrentYear() {
+        return Calendar.getInstance().get(Calendar.YEAR);
+    }
+
+    public static int getCurrentMonth() {
+        return Calendar.getInstance().get(Calendar.MONTH);
+    }
+
+    public static int getCurrentDay() {
+        return Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+    }
+
+    public static int getCurrentHour() {
+        return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+    }
+
+    public static int getCurrentMinute() {
+        return Calendar.getInstance().get(Calendar.MINUTE);
+    }
 
     public static String convertDate(long dateInMilliseconds, String dateFormat) {
         return DateFormat.format(dateFormat, dateInMilliseconds).toString();
