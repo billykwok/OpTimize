@@ -1,4 +1,4 @@
-package com.optimize.optimize.activities;
+package com.optimize.optimize.managers;
 
 import com.optimize.optimize.calendar.TimeSlot;
 import com.parse.ParseUser;

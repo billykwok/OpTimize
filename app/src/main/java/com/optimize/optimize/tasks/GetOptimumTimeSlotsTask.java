@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 import android.text.format.DateUtils;
 import android.util.Log;
 
-import com.optimize.optimize.activities.OTEventManager;
+import com.optimize.optimize.managers.OTEventManager;
 import com.optimize.optimize.calendar.CalendarManager;
 import com.optimize.optimize.calendar.TimeSlot;
 import com.parse.ParseUser;

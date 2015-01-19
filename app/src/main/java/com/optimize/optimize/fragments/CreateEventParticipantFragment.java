@@ -15,7 +15,7 @@ import com.optimize.optimize.tasks.GetOptimumTimeSlotsTask;
 import com.optimize.optimize.EventTimeType;
 import com.optimize.optimize.R;
 import com.optimize.optimize.WithInType;
-import com.optimize.optimize.activities.OTEventManager;
+import com.optimize.optimize.managers.OTEventManager;
 import com.optimize.optimize.adapters.AddParticipantsAdapter;
 import com.optimize.optimize.calendar.CalendarManager;
 import com.optimize.optimize.utilities.FastToast;
