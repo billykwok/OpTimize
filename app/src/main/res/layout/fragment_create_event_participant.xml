@@ -10,28 +10,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/ot_green"
-            android:id="@+id/btnStart"
-            android:text="@string/starting_from"
-            style="@style/btn_add_parti"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/ot_blue"
-            android:id="@+id/btnEnd"
-            android:text="@string/end_time"
-            style="@style/btn_add_parti"/>
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinnerWithin"
-            android:layout_gravity="center_horizontal" />
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -56,20 +34,14 @@
             android:id="@+id/lsParticipants"
             android:layout_gravity="center_horizontal" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="time"
-            android:ems="10"
-            android:id="@+id/etxtTime" />
-
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Get Free Time"
-            android:id="@+id/btnCompare"
-            android:layout_gravity="center_horizontal" />
-
+            android:id="@+id/btn_compare"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Compare"
+            android:textColor="@color/white"
+            android:background="@color/ot_red_dark"/>
 
     </LinearLayout>
 
