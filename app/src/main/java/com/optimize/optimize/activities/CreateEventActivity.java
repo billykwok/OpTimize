@@ -78,7 +78,7 @@ public class CreateEventActivity extends OTActionBarActivity implements RadioGro
 
     @OnClick(R.id.btn_next_step)
     public void onClickNextStep() {
-        rgStep.check(rbStepIds[Math.min(pagerAdapter.getCount(), viewPager.getCurrentItem() + 1)]);
+        rgStep.check(rbStepIds[Math.min(pagerAdapter.getCount() - 1, viewPager.getCurrentItem() + 1)]);
     }
 
     @Override
