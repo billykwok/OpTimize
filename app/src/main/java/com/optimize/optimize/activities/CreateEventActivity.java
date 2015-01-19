@@ -117,6 +117,7 @@ public class CreateEventActivity extends OTActionBarActivity implements RadioGro
         public int getCount() {
             return 3;
         }
+
     }
 
 }

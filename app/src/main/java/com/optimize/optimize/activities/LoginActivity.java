@@ -49,19 +49,7 @@ public class LoginActivity extends OTActionBarActivity {
         // showHashKey(this);
     }
 
-    /* public void showHashKey(Context context) {
-        try {
-            PackageInfo info = context.getPackageManager().getPackageInfo(
-                    "com.optimize.optimize", PackageManager.GET_SIGNATURES); //Your package name here
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.i("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-        } catch (NoSuchAlgorithmException e) {
-        }
-    } */
+
     private boolean isEmailValid() {
         return etEmail.getText().toString().trim().contains("@");
     }
@@ -144,6 +132,8 @@ public class LoginActivity extends OTActionBarActivity {
             FastToast.show(errMsg, LoginActivity.this);
         }
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

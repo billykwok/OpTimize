@@ -26,31 +26,37 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <EditText
+            <TextView
                 android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:layout_height="35dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textSize="16sp"
                 android:singleLine="true"
-                android:hint="Starting Date"/>
+                android:hint="Starting Date"
+                android:background="@color/grey_light"/>
 
             <TextView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:text="to"
                 android:textColor="@color/white"
+                android:textAllCaps="true"
                 android:gravity="center"
                 android:background="@color/ot_red_dark"/>
 
-            <EditText
+            <TextView
                 android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:layout_height="35dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textSize="16sp"
                 android:singleLine="true"
-                android:hint="Ending Date"/>
+                android:hint="Ending Date"
+                android:background="@color/grey_light"/>
 
         </LinearLayout>
         
@@ -69,29 +75,37 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <EditText
+            <TextView
                 android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:hint="Starting Time"/>
+                android:layout_height="35dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:singleLine="true"
+                android:hint="Starting Time"
+                android:background="@color/grey_light"/>
 
             <TextView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:text="to"
                 android:textColor="@color/white"
+                android:textAllCaps="true"
                 android:gravity="center"
                 android:background="@color/ot_red_dark"/>
 
-            <EditText
+            <TextView
                 android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:hint="Starting Time"/>
+                android:layout_height="35dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:singleLine="true"
+                android:hint="Ending Time"
+                android:background="@color/grey_light"/>
 
         </LinearLayout>
 
@@ -107,11 +121,18 @@
             android:text="Duration of Event"
             android:textColor="@color/black"/>
 
-        <EditText
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:hint="Duration"/>
+        <TextView
+            android:layout_width="314dp"
+            android:layout_height="35dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingRight="10dp"
+            android:layout_gravity="center"
+            android:gravity="left|center_vertical"
+            android:textSize="16sp"
+            android:hint="Duration"
+            android:background="@color/grey_light"/>
 
     </LinearLayout>
 
