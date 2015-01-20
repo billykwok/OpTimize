@@ -81,6 +81,7 @@ public class CreateEventDetailFragment extends OTFragment {
         Log.i("Results", "Title: " + name + "Des: " + description + "Time: " + time);
 
         final OTEvent otEvent = new OTEvent(name, timeSlot.getStart(), timeSlot.getEnd(), description, location);
+   
         otEvent.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {

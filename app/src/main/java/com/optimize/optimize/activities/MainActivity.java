@@ -158,18 +158,18 @@ public class MainActivity extends OTActionBarActivity {
         sample_user4.setEmail("sample_user4@gmail.com");
         String id = null;
 
-        sample_user4.signUpInBackground(new SignUpCallback() {
-            @Override
-            public void done(com.parse.ParseException e) {
-                if (e != null) {
-                    sample_user4 = ParseUser.getCurrentUser();
-                    testCaseAddIdToEvent(celist2);
-                } else {
-                    e.printStackTrace();
-                }
-
-            }
-        });
+//        sample_user4.signUpInBackground(new SignUpCallback() {
+//            @Override
+//            public void done(com.parse.ParseException e) {
+//                if (e != null) {
+//                    sample_user4 = ParseUser.getCurrentUser();
+//                    testCaseAddIdToEvent(celist2);
+//                } else {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        });
 
 
 //        sample_user4.saveInBackground(new SaveCallback() {

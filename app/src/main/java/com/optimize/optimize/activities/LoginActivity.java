@@ -52,6 +52,16 @@ public class LoginActivity extends OTActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
+        ParseUser.logInInBackground("james", "password000", new LogInCallback() {
+            @Override
+            public void done(ParseUser parseUser, ParseException e) {
+                if (e == null) {
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                } else {
+                    e.printStackTrace();
+                }
+            }
+        });
         // showHashKey(this);
     }
 
@@ -141,6 +151,7 @@ public class LoginActivity extends OTActionBarActivity {
                     if (parseUser.get("facebookId") == null) {
                         parseUser.put("facebookId", graphUser.getId());
                     }
+
                 }
                 parseUser.saveInBackground(new SaveCallback() {
                     @Override
