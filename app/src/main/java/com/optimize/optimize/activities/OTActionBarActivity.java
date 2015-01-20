@@ -14,6 +14,7 @@ import com.optimize.optimize.fragments.TimePickerFragment;
 import com.optimize.optimize.models.Participant;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,6 +56,9 @@ public class OTActionBarActivity extends BaseActionBarActivity {
     }
 
     public List<TimeSlot> getPossibleTimeSlots() {
+        if (possibleTimeSlots == null) {
+            possibleTimeSlots = new ArrayList<>();
+        }
         return possibleTimeSlots;
     }
 
