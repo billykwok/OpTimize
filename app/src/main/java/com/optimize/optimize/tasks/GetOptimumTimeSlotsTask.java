@@ -22,7 +22,7 @@ public class GetOptimumTimeSlotsTask extends AsyncTask<Void, Void , List<TimeSlo
     protected List<TimeSlot> doInBackground(Void... params) {
         List<ParseUser> parseUsers = OTEventManager.getInstance().getParseUserList();
         CalendarManager cm = CalendarManager.getInstance();
-        return CalendarManager.getOptimumTimeSlots(parseUsers, null, 3 * DateUtils.HOUR_IN_MILLIS, cm.getStartHour(), cm.getEndHour(), new Date().getTime(), (new Date().getTime() + 30 * DateUtils.DAY_IN_MILLIS), 3);
+        return CalendarManager.getOptimumTimeSlots(parseUsers, null, 3 * DateUtils.HOUR_IN_MILLIS, 9, 23, new Date().getTime(), (new Date().getTime() + 30 * DateUtils.DAY_IN_MILLIS), 3);
     }
 
     @Override

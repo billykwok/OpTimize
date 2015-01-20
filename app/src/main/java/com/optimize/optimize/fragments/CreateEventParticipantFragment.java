@@ -94,18 +94,4 @@ public class CreateEventParticipantFragment extends OTFragment {
         });
     }
 
-    @OnClick(R.id.btn_compare)
-    void onBtnCompareClicked() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                OTEventManager om = OTEventManager.getInstance();
-                om.setParseUserList(parseUsers);
-
-                new GetOptimumTimeSlotsTask().execute();
-            }
-        }).start();
-
-    }
-
 }

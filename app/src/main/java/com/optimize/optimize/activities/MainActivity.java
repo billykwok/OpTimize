@@ -56,7 +56,7 @@ public class MainActivity extends OTActionBarActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
-        testCase();
+//        testCase();
 
         // Toolbar
         setTitle("Events");
