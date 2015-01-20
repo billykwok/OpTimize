@@ -1,5 +1,6 @@
 package com.optimize.optimize.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.optimize.optimize.R;
 import com.optimize.optimize.calendar.CalendarEvent;
 import com.optimize.optimize.calendar.CalendarService;
 import com.optimize.optimize.calendar.TimeSlot;
+import com.optimize.optimize.managers.OTEventManager;
 import com.optimize.optimize.models.OTEvent;
 import com.optimize.optimize.models.OTUserService;
 import com.optimize.optimize.models.Participant;
@@ -24,6 +26,7 @@ import com.parse.SaveCallback;
 
 import org.json.JSONArray;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,25 +51,82 @@ public class CreateEventDetailFragment extends OTFragment {
     @InjectView(R.id.btn_cancel)
     Button btnCancel;
 
+    List<TimeSlot> possibleTimeSlot;
+    ArrayAdapter<TimeSlot> adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_event_detail, container, false);
         ButterKnife.inject(this, view);
 
-        List<TimeSlot> possibleTimeSlot = new ArrayList<>();
+//        List<TimeSlot> possibleTimeSlot = new ArrayList<>();
+//
+////        Test case
+//        List<CalendarEvent> ce;
+//        ce = CalendarService.getEventList(getBaseContext());
+//        possibleTimeSlot.add(new TimeSlot(ce.get(0).getBegin(), ce.get(0).getEnd()));
+        if (getOTActionBarActivity().getPossibleTimeSlots() != null) {
+            for (TimeSlot t: getOTActionBarActivity().getPossibleTimeSlots()) {
+                Log.d(TAG, "on create view get possible time slots: " + t.toString());
+            }
+        } else {
+            Log.e(TAG, "on create view null possible time slots");
+        }
 
-        //Test case
-        List<CalendarEvent> ce;
-        ce = CalendarService.getEventList(getBaseContext());
-        possibleTimeSlot.add(new TimeSlot(ce.get(0).getBegin(), ce.get(0).getEnd()));
+        possibleTimeSlot = getOTActionBarActivity().getPossibleTimeSlots();
 
-        // List<TimeSlot> possibleTimeSlot = OTEventManager.getInstance().getPossibleTimeSlot();
 
-        ArrayAdapter<TimeSlot> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_spinner_item, possibleTimeSlot);
+        adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_spinner_item, possibleTimeSlot);
         spEventTimeSlot.setAdapter(adapter);
 
         return view;
+    }
+
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getOTActionBarActivity().getPossibleTimeSlots() != null) {
+            for (TimeSlot t: getOTActionBarActivity().getPossibleTimeSlots()) {
+                Log.d(TAG, "on Create get possible time slots: " + t.toString());
+            }
+        } else {
+            Log.e(TAG, "on Create null possible time slots");
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (getOTActionBarActivity().getPossibleTimeSlots() != null) {
+            for (TimeSlot t: getOTActionBarActivity().getPossibleTimeSlots()) {
+                Log.d(TAG, " on start get possible time slots: " + t.toString());
+            }
+        } else {
+            Log.e(TAG, "on start null possible time slots");
+        }
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (getOTActionBarActivity().getPossibleTimeSlots() != null) {
+            for (TimeSlot t: getOTActionBarActivity().getPossibleTimeSlots()) {
+                Log.d(TAG, " get possible time slots: " + t.toString());
+            }
+        } else {
+            Log.e(TAG, " null possible time slots");
+        }
+    }
+
+    public void notifyTimeSlotChange() {
+        if (possibleTimeSlot != null) {
+            possibleTimeSlot.clear();
+            possibleTimeSlot.addAll(getOTActionBarActivity().getPossibleTimeSlots());
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @OnClick(R.id.btn_create_event)
@@ -83,33 +143,6 @@ public class CreateEventDetailFragment extends OTFragment {
 
 
         ParseUser current = ParseUser.getCurrentUser();
-
-        //test case
-//        List<CalendarEvent> celist5 = new ArrayList<CalendarEvent>();
-//        celist5.add(CalendarService.createEvent("Class", 2015, 1, 19, 9, 30,     2015, 1, 19, 10, 20));
-//        celist5.add(CalendarService.createEvent("Class", 2015, 1, 19, 12, 30,    2015, 1, 19, 14, 20));
-//        celist5.add(CalendarService.createEvent("Class", 2015, 1, 19, 16, 30,    2015, 1, 19, 18, 00));
-//        celist5.add(CalendarService.createEvent("Class", 2015, 1, 20, 12, 0,     2015, 1, 20, 13, 20));
-//        celist5.add(CalendarService.createEvent("Class", 2015, 1, 20, 16, 30,    2015, 1, 20, 17, 50));
-//        celist5.add(CalendarService.createEvent("Class", 2015, 1, 21, 13, 50,    2015, 1, 21, 15, 50));
-//        celist5.add(CalendarService.createEvent("Class", 2015, 1, 21, 18, 00,    2015, 1, 21, 21, 20));
-//        celist5.add(CalendarService.createEvent("Class", 2015, 1, 22, 12, 0,     2015, 1, 22, 13, 20));
-//        celist5.add(CalendarService.createEvent("Class", 2015, 1, 22, 16, 30,    2015, 1, 22, 17, 50));
-//        celist5.add(CalendarService.createEvent("Class", 2015, 1, 23, 9, 00,     2015, 1, 23, 12, 50));
-//        celist5.add(CalendarService.createEvent("Class", 2015, 1, 23, 16, 30,    2015, 1, 23, 18, 00));
-//
-//        final ParseUser sample_user5 = new ParseUser();
-//        OTUserService.setEventList(celist5, sample_user5);
-//        sample_user5.setUsername("sample_user_name5");
-//        sample_user5.setPassword("sample_password5");
-//        sample_user5.setEmail("sample_user5@gmail.com");
-//
-//        sample_user5.signUpInBackground();
-//
-//        sample_user5.saveInBackground(null);
-
-
-
 
         if(current != null) {
             final OTEvent otEvent = new OTEvent(name, timeSlot.getStart(), timeSlot.getEnd(), location, description);

@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 
 import com.optimize.android.widget.BetterViewPager;
 import com.optimize.optimize.R;
+import com.optimize.optimize.calendar.TimeSlot;
 import com.optimize.optimize.fragments.CreateEventDetailFragment;
 import com.optimize.optimize.fragments.CreateEventParticipantFragment;
 import com.optimize.optimize.fragments.CreateEventTimeFragment;
@@ -36,10 +37,10 @@ public class CreateEventActivity extends OTActionBarActivity implements RadioGro
     Toolbar toolbar;
 
     @InjectView(R.id.rg_step)
-    RadioGroup rgStep;
+    public RadioGroup rgStep;
 
     @InjectView(R.id.pager)
-    BetterViewPager viewPager;
+    public BetterViewPager viewPager;
 
     int[] rbStepIds = { R.id.rb_step_1, R.id.rb_step_2, R.id.rb_step_3};
     PagerAdapter pagerAdapter;
@@ -89,7 +90,7 @@ public class CreateEventActivity extends OTActionBarActivity implements RadioGro
             } else if (checkedId == R.id.rb_step_2) {
                 viewPager.setCurrentItem(1, true);
             } else if (checkedId == R.id.rb_step_3) {
-                viewPager.setCurrentItem(3, true);
+                viewPager.setCurrentItem(2, true);
             }
         }
     }

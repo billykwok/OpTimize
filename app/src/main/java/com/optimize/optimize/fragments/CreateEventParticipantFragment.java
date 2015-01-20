@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.optimize.optimize.calendar.TimeSlot;
 import com.optimize.optimize.tasks.GetOptimumTimeSlotsTask;
 import com.optimize.optimize.EventTimeType;
 import com.optimize.optimize.R;
@@ -28,6 +29,7 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -94,4 +96,30 @@ public class CreateEventParticipantFragment extends OTFragment {
         });
     }
 
+    @OnClick(R.id.btn_compare)
+    void onBtnCompareClicked() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OTEventManager om = OTEventManager.getInstance();
+                om.setParseUserList(parseUsers);
+
+                new GetOptimumTimeSlotsTask(getOTActionBarActivity()).execute();
+            }
+        }).start();
+
+//        OTEventManager om = OTEventManager.getInstance();
+//        om.setParseUserList(parseUsers);
+//        List<TimeSlot> timeSlots = null;
+//        try {
+//            timeSlots = new GetOptimumTimeSlotsTask().get();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        }
+//        getOTActionBarActivity().setPossibleTimeSlots(timeSlots);
+
+
+    }
 }
