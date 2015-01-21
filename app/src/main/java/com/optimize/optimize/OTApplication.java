@@ -2,6 +2,7 @@ package com.optimize.optimize;
 
 import com.optimize.android.BaseApplication;
 import com.optimize.optimize.models.OTEvent;
+import com.optimize.optimize.models.OTEventList;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -16,5 +17,6 @@ public class OTApplication extends BaseApplication {
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "ZsFfXsCtRyddAgafqyaQYeCwlm0wpgSbGvi9pllv", "isCIVGhBxffrXr7ZIKsEGgogusoNPy7bFB39lmlj");
         ParseObject.registerSubclass(OTEvent.class);
+        ParseObject.registerSubclass(OTEventList.class);
     }
 }
