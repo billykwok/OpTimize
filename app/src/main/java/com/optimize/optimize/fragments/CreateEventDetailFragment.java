@@ -52,14 +52,12 @@ public class CreateEventDetailFragment extends OTFragment {
     Button btnCancel;
 
     List<TimeSlot> possibleTimeSlot;
-    ArrayAdapter<TimeSlot> adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_event_detail, container, false);
         ButterKnife.inject(this, view);
-
 //        List<TimeSlot> possibleTimeSlot = new ArrayList<>();
 //
 ////        Test case
@@ -79,56 +77,55 @@ public class CreateEventDetailFragment extends OTFragment {
         Log.d(TAG, "running ... set adapter with timeslots no.: " + String.valueOf(possibleTimeSlot.size()));
         ArrayAdapter<TimeSlot> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_spinner_item, possibleTimeSlot);
         spEventTimeSlot.setAdapter(adapter);
-
         Log.d(TAG, "running ... set adapter ");
 
 
         return view;
     }
 
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getOTActionBarActivity().getPossibleTimeSlots() != null) {
-            for (TimeSlot t: getOTActionBarActivity().getPossibleTimeSlots()) {
-                Log.d(TAG, "on Create get possible time slots: " + t.toString());
-            }
-            notifyTimeSlotChange();
-        } else {
-            Log.e(TAG, "on Create null possible time slots");
-        }
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (getOTActionBarActivity().getPossibleTimeSlots() != null) {
-            for (TimeSlot t: getOTActionBarActivity().getPossibleTimeSlots()) {
-                Log.d(TAG, " on start get possible time slots: " + t.toString());
-            }
-            notifyTimeSlotChange();
-        } else {
-            Log.e(TAG, "on start null possible time slots");
-        }
-
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        if (getOTActionBarActivity().getPossibleTimeSlots() != null) {
-            for (TimeSlot t: getOTActionBarActivity().getPossibleTimeSlots()) {
-                Log.d(TAG, " get possible time slots: " + t.toString());
-            }
-            notifyTimeSlotChange();
-        } else {
-            Log.e(TAG, " null possible time slots");
-        }
-
-    }
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        if (getOTActionBarActivity().getPossibleTimeSlots() != null) {
+//            for (TimeSlot t: getOTActionBarActivity().getPossibleTimeSlots()) {
+//                Log.d(TAG, "on Create get possible time slots: " + t.toString());
+//            }
+//            notifyTimeSlotChange();
+//        } else {
+//            Log.e(TAG, "on Create null possible time slots");
+//        }
+//
+//    }
+//
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        Log.i("Page3","Hi");
+//        if (getOTActionBarActivity().getPossibleTimeSlots() != null) {
+//            for (TimeSlot t: getOTActionBarActivity().getPossibleTimeSlots()) {
+//                Log.d(TAG, " on start get possible time slots: " + t.toString());
+//            }
+//            notifyTimeSlotChange();
+//        } else {
+//            Log.e(TAG, "on start null possible time slots");
+//        }
+//
+//    }
+//
+//
+//    @Override
+//    public void onAttach(Activity activity) {
+//        super.onAttach(activity);
+//        if (getOTActionBarActivity().getPossibleTimeSlots() != null) {
+//            for (TimeSlot t: getOTActionBarActivity().getPossibleTimeSlots()) {
+//                Log.d(TAG, " get possible time slots: " + t.toString());
+//            }
+//            notifyTimeSlotChange();
+//        } else {
+//            Log.e(TAG, " null possible time slots");
+//        }
+//
+//    }
 
     public void notifyTimeSlotChange() {
         if (possibleTimeSlot != null) {
@@ -190,18 +187,6 @@ public class CreateEventDetailFragment extends OTFragment {
                 description,
                 location,
                 CalendarService.getCalendarId(getBaseContext()));
-
-                /*new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if (e == null) {
-                            FastToast.show("save success", getOTActionBarActivity());
-                        } else {
-                            e.printStackTrace();
-                        }
-                    }
-                });*/
-
         finishActivity();
     }
 

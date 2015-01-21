@@ -32,7 +32,7 @@ public class GetOptimumTimeSlotsTask extends AsyncTask<Void, Void , List<TimeSlo
     @Override
     protected List<TimeSlot> doInBackground(Void... params) {
         List<ParseUser> parseUsers = OTEventManager.getInstance().getParseUserList();
-        parseUsers.add(ParseUser.getCurrentUser());
+//        parseUsers.add(ParseUser.getCurrentUser());
 //        for(ParseUser user : parseUsers){
 //            Log.i("User", user + " ");
 //            for(CalendarEvent ce : OTUserService.getEvents(user))

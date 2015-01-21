@@ -88,6 +88,7 @@ public class CreateEventParticipantFragment extends OTFragment {
                         Log.e(TAG, "null array");
                     }
                     CreateEventParticipantFragment.this.parseUsers.addAll(parseUsers);
+                    CreateEventParticipantFragment.this.parseUsers.add(ParseUser.getCurrentUser());
                     CreateEventParticipantFragment.this.addParticipantsAdapter.notifyDataSetChanged();
                 } else {
                     FastToast.show(R.string.no_such_user, getOTActionBarActivity());
