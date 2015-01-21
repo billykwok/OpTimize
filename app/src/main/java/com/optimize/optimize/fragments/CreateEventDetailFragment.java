@@ -187,6 +187,7 @@ public class CreateEventDetailFragment extends OTFragment {
                 description,
                 location,
                 CalendarService.getCalendarId(getBaseContext()));
+        FastToast.show("Event exported to Calendar", getApplicationContext());
         finishActivity();
     }
 

@@ -65,6 +65,7 @@ public class CreateEventParticipantFragment extends OTFragment {
         ButterKnife.inject(this, view);
         cm = CalendarManager.getInstance();
         parseUsers = new ArrayList<>();
+        parseUsers.add(ParseUser.getCurrentUser());
         addParticipantsAdapter = new AddParticipantsAdapter(getOTActionBarActivity(), parseUsers);
         lsParticipants.setAdapter(addParticipantsAdapter);
         return view;
@@ -88,7 +89,6 @@ public class CreateEventParticipantFragment extends OTFragment {
                         Log.e(TAG, "null array");
                     }
                     CreateEventParticipantFragment.this.parseUsers.addAll(parseUsers);
-                    CreateEventParticipantFragment.this.parseUsers.add(ParseUser.getCurrentUser());
                     CreateEventParticipantFragment.this.addParticipantsAdapter.notifyDataSetChanged();
                 } else {
                     FastToast.show(R.string.no_such_user, getOTActionBarActivity());

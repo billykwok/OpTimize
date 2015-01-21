@@ -132,6 +132,11 @@ public class CreateEventActivity extends OTActionBarActivity implements RadioGro
             return 3;
         }
 
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
+        }
+
     }
 
 }
