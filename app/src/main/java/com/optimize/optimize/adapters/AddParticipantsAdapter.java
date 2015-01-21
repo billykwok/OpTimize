@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.facebook.widget.ProfilePictureView;
 import com.optimize.optimize.R;
 import com.parse.ParseUser;
 
@@ -55,6 +56,9 @@ public class AddParticipantsAdapter extends BaseAdapter {
             holder = (ViewHolder)convertView.getTag();
         }
         holder.txtParticipantUsername.setText(getItem(position).getUsername());
+        String fbId = getItem(position).getString("facebookId");
+        if (fbId != null)
+            holder.ppwFbIcon.setProfileId(fbId);
         return convertView;
     }
 
@@ -62,7 +66,10 @@ public class AddParticipantsAdapter extends BaseAdapter {
         @InjectView(R.id.txtParticipantUsername)
         TextView txtParticipantUsername;
 
+        ProfilePictureView ppwFbIcon;
+
         public ViewHolder(View view) {
+            ppwFbIcon = (ProfilePictureView) view.findViewById(R.id.ppwFbIcon);
             ButterKnife.inject(this, view);
         }
     }

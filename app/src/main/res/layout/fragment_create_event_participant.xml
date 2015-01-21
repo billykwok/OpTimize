@@ -1,4 +1,4 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              tools:context="com.optimize.optimize.fragments.CreateEventParticipantFragment"
              android:layout_width="match_parent"
@@ -6,43 +6,57 @@
              android:scrollbars="vertical">
 
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/linearLayout"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
-
-            <EditText
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/etxtFindUser" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/find"
-                android:id="@+id/btnFind" />
-        </LinearLayout>
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="168dp"
-            android:id="@+id/lsParticipants"
-            android:layout_gravity="center_horizontal" />
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:id="@+id/etxtFindUser"
+            android:hint="Enter User's Tag"
+            android:textColorHint="#9999"/>
 
         <Button
-            android:id="@+id/btn_compare"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:text="Compare"
+            android:text="@string/find"
+            android:id="@+id/btnFind"
+            android:layout_marginLeft="10dp"
             android:textColor="@color/white"
             android:background="@color/ot_red_dark"/>
-
     </LinearLayout>
 
-</ScrollView>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="168dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/lsParticipants"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/btn_compare"
+        android:layout_below="@+id/linearLayout" />
+
+    <Button
+        android:id="@+id/btn_compare"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Compare"
+        android:textColor="@color/white"
+        android:background="@color/ot_red_dark"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="48dp" />
+
+</RelativeLayout>
+
+
