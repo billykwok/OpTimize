@@ -3,6 +3,7 @@ package com.optimize.optimize.fragments;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import com.optimize.optimize.EventDate;
 import com.optimize.optimize.EventTime;
 import com.optimize.optimize.EventTimeType;
 import com.optimize.optimize.R;
+import com.optimize.optimize.calendar.CalendarManager;
+import com.optimize.optimize.managers.OTEventManager;
 import com.optimize.optimize.utilities.DateUtils;
 
 import java.util.Calendar;
@@ -59,6 +62,11 @@ public class CreateEventTimeFragment extends OTFragment {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 tvDates.get(0).setText(new EventDate(year, monthOfYear, dayOfMonth).toString());
+                long startDate = 0;
+                Calendar beginTime = Calendar.getInstance();
+                beginTime.set(year, monthOfYear, dayOfMonth, 0, 0);
+                startDate = beginTime.getTimeInMillis();
+                CalendarManager.getInstance().setStartDate(startDate);
             }
         };
 
@@ -66,6 +74,11 @@ public class CreateEventTimeFragment extends OTFragment {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 tvDates.get(1).setText(new EventDate(year, monthOfYear, dayOfMonth).toString());
+                long endDate = 0;
+                Calendar endTime = Calendar.getInstance();
+                endTime.set(year, monthOfYear, dayOfMonth, 23, 59);
+                endDate = endTime.getTimeInMillis();
+                CalendarManager.getInstance().setEndDate(endDate);
             }
         };
 
@@ -73,6 +86,7 @@ public class CreateEventTimeFragment extends OTFragment {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 tvTimes.get(0).setText(new EventTime(hourOfDay, minute).toString());
+                CalendarManager.getInstance().setStartHour(hourOfDay);
             }
         };
 
@@ -80,6 +94,7 @@ public class CreateEventTimeFragment extends OTFragment {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 tvTimes.get(1).setText(new EventTime(hourOfDay, minute).toString());
+                CalendarManager.getInstance().setEndHour(hourOfDay);
             }
         };
 
@@ -87,6 +102,8 @@ public class CreateEventTimeFragment extends OTFragment {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 tvDuration.setText(new EventTime(hourOfDay, minute).toString());
+                CalendarManager.getInstance().setDurationHr(hourOfDay);
+                CalendarManager.getInstance().setDurationMin(minute);
             }
         };
 

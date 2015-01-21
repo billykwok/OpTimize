@@ -3,6 +3,7 @@ package com.optimize.optimize.calendar;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.optimize.optimize.utilities.DateUtils;
 import com.parse.ParseObject;
 import com.parse.SaveCallback;
 
@@ -51,7 +52,7 @@ public class CalendarEvent {
 
     @Override
     public String toString(){
-        return getTitle() + " " + getBegin() + " " + getEnd();
+        return getTitle() + " " + getBegin() + " " + getEnd() + " " + DateUtils.convertDate(getBegin(), "dd/MM hh:mm AA" + " " + DateUtils.convertDate(getEnd(), "dd/MM hh:mm AA"));
     }
 
     public JSONObject toJson() {

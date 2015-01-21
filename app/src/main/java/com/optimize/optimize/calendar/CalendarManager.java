@@ -18,8 +18,10 @@ public class CalendarManager {
 
     private int startHour;
     private int endHour;
-    private WithInType withIn;
-    private int duration;
+    private long startDate;
+    private long endDate;
+    private int durationHr;
+    private int durationMin;
     private List<OTUserService> users;
 
     public static final long ONT_SEC_MILLIS = DateUtils.SECOND_IN_MILLIS;
@@ -39,8 +41,36 @@ public class CalendarManager {
     private CalendarManager() {
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public long getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(long startDate) {
+        this.startDate = startDate;
+    }
+
+    public long getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(long endDate) {
+        this.endDate = endDate;
+    }
+
+    public int getDurationHr() {
+        return durationHr;
+    }
+
+    public void setDurationHr(int durationHr) {
+        this.durationHr = durationHr;
+    }
+
+    public int getDurationMin() {
+        return durationMin;
+    }
+
+    public void setDurationMin(int durationMin) {
+        this.durationMin = durationMin;
     }
 
     public void setUsers(List<OTUserService> users) {
@@ -64,15 +94,6 @@ public class CalendarManager {
 
     public int getStartHour() {
         return startHour;
-    }
-
-    public void setWithIn(WithInType withIn) {
-        this.withIn = withIn;
-        Log.d(TAG, withIn.toString());
-    }
-
-    public WithInType getWithIn() {
-        return withIn;
     }
 
     public long getEndHourInMilliSec() {

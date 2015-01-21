@@ -134,7 +134,7 @@ public class CreateEventDetailFragment extends OTFragment {
         FastToast.show("Create event", getActivity());
 
         String name = etEventName.getText().toString();
-        String location = "My home";
+        String location = "To be confirmed...";
         String description = etEventDesc.getText().toString();
         String time = spEventTimeSlot.getSelectedItem().toString();
 
@@ -151,23 +151,25 @@ public class CreateEventDetailFragment extends OTFragment {
                 @Override
                 public void done(ParseException e) {
                     if (e == null) {
-                        List<ParseUser> users = getOTActionBarActivity().getParseUsers();
-                        String otEventId = otEvent.getObjectId();
-                        for (ParseUser parseUser : users) {
-                            JSONArray otEventIdList = parseUser.getJSONArray("otEventsId");
-                            otEventIdList.put(otEventId);
-                            parseUser.put("otEventsId", otEventIdList);
-                            parseUser.saveInBackground(new SaveCallback() {
-                                @Override
-                                public void done(ParseException e) {
-                                    if (e == null) {
-                                        FastToast.show("save success", getApplicationContext());
-                                    }
-                                }
-                            });
-                        }
-                        List<Participant> participantList = Participant.fromParseUsers(users);
-                        otEvent.setParticipants(participantList);
+//                        List<ParseUser> users = getOTActionBarActivity().getParseUsers();
+//                        String otEventId = otEvent.getObjectId();
+                          //TODO Implement adding otEventsId to other users
+//                        Log.i("Test1","Reach");
+//                        for (ParseUser parseUser : users) {
+//                            JSONArray otEventIdList = parseUser.getJSONArray("otEventsId");
+//                            otEventIdList.put(otEventId);
+//                            parseUser.put("otEventsId", otEventIdList);
+//                            parseUser.saveInBackground(new SaveCallback() {
+//                                @Override
+//                                public void done(ParseException e) {
+//                                    if (e == null) {
+//                                        FastToast.show("save success", getApplicationContext());
+//                                    }
+//                                }
+//                            });
+//                        }
+//                        List<Participant> participantList = Participant.fromParseUsers(users);
+//                        otEvent.setParticipants(participantList);
                     }
                 }
             });

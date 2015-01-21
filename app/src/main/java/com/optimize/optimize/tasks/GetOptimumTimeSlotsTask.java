@@ -7,9 +7,11 @@ import android.util.Log;
 import com.optimize.optimize.R;
 import com.optimize.optimize.activities.CreateEventActivity;
 import com.optimize.optimize.activities.OTActionBarActivity;
+import com.optimize.optimize.calendar.CalendarEvent;
 import com.optimize.optimize.managers.OTEventManager;
 import com.optimize.optimize.calendar.CalendarManager;
 import com.optimize.optimize.calendar.TimeSlot;
+import com.optimize.optimize.models.OTUserService;
 import com.parse.ParseUser;
 
 import java.util.Date;
@@ -30,6 +32,12 @@ public class GetOptimumTimeSlotsTask extends AsyncTask<Void, Void , List<TimeSlo
     @Override
     protected List<TimeSlot> doInBackground(Void... params) {
         List<ParseUser> parseUsers = OTEventManager.getInstance().getParseUserList();
+        parseUsers.add(ParseUser.getCurrentUser());
+//        for(ParseUser user : parseUsers){
+//            Log.i("User", user + " ");
+//            for(CalendarEvent ce : OTUserService.getEvents(user))
+//                Log.i("Events", ce + " ");
+//        }
         CalendarManager cm = CalendarManager.getInstance();
 
         createEventActivity.runOnUiThread(new Runnable() {
@@ -38,7 +46,9 @@ public class GetOptimumTimeSlotsTask extends AsyncTask<Void, Void , List<TimeSlo
                 createEventActivity.blockForApi("Comparing...");
             }
         });
-        return CalendarManager.getOptimumTimeSlots(parseUsers, null, 3 * DateUtils.HOUR_IN_MILLIS, 9, 23, new Date().getTime(), (new Date().getTime() + 30 * DateUtils.DAY_IN_MILLIS), 3);
+
+        long duration = cm.getDurationHr() * DateUtils.HOUR_IN_MILLIS + cm.getDurationMin() * DateUtils.MINUTE_IN_MILLIS;
+        return CalendarManager.getOptimumTimeSlots(parseUsers, null, duration, cm.getStartHour(), cm.getEndHour(), cm.getStartDate(), cm.getEndDate(), 3);
     }
 
     @Override

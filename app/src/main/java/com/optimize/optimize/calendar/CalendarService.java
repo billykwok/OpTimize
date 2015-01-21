@@ -25,10 +25,10 @@ public class CalendarService{
         long startMillis = 0;
         long endMillis = 0;
         Calendar beginTime = Calendar.getInstance();
-        beginTime.set(startYear, startMonth, startDay, startHour, startMin);
+        beginTime.set(startYear, startMonth-1, startDay, startHour, startMin);
         startMillis = beginTime.getTimeInMillis();
         Calendar endTime = Calendar.getInstance();
-        endTime.set(endYear, endMonth, endDay, endHour, endMin);
+        endTime.set(endYear, endMonth-1, endDay, endHour, endMin);
         endMillis = endTime.getTimeInMillis();
 
         CalendarEvent newEvent = new CalendarEvent(title, startMillis, endMillis);
