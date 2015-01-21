@@ -12,6 +12,7 @@ import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.model.GraphUser;
 import com.optimize.optimize.R;
+import com.optimize.optimize.models.OTEventList;
 import com.optimize.optimize.utilities.FastToast;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -52,16 +53,16 @@ public class LoginActivity extends OTActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
-        ParseUser.logInInBackground("james", "password000", new LogInCallback() {
-            @Override
-            public void done(ParseUser parseUser, ParseException e) {
-                if (e == null) {
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                } else {
-                    e.printStackTrace();
-                }
-            }
-        });
+//        ParseUser.logInInBackground("james", "password000", new LogInCallback() {
+//            @Override
+//            public void done(ParseUser parseUser, ParseException e) {
+//                if (e == null) {
+//                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                } else {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
         // showHashKey(this);
     }
 
@@ -88,13 +89,15 @@ public class LoginActivity extends OTActionBarActivity {
             String email = etEmail.getText().toString().trim();
             String username = etUsername.getText().toString().trim();
             String password = etPassword.getText().toString().trim();
-            ParseUser parseUser = new ParseUser();
+            final ParseUser parseUser = new ParseUser();
             parseUser.setEmail(email);
             parseUser.setUsername(username);
             parseUser.setPassword(password);
+            blockForApi(R.string.register);
             parseUser.signUpInBackground(new SignUpCallback() {
                 @Override
                 public void done(ParseException e) {
+                    createOtEventList();
                     afterSigIn(e);
                 }
             });
@@ -108,6 +111,7 @@ public class LoginActivity extends OTActionBarActivity {
         if (isFormValid()) {
             String username = etUsername.getText().toString().trim();
             String password = etPassword.getText().toString().trim();
+            blockForApi(R.string.sign_in);
             ParseUser.logInInBackground(username, password, new LogInCallback() {
                 @Override
                 public void done(ParseUser parseUser, ParseException e) {
@@ -126,7 +130,12 @@ public class LoginActivity extends OTActionBarActivity {
         ParseFacebookUtils.logIn(permissions, this , new LogInCallback() {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
+                if (e != null && parseUser != null && parseUser.isNew()) {
+                    getFacebookId(parseUser);
+                    createOtEventList();
+                }
                 afterSignIn(parseUser, e);
+
             }
         });
     }
@@ -136,11 +145,7 @@ public class LoginActivity extends OTActionBarActivity {
             FastToast.show("No such user", this);
             return;
         }
-        if (e == null) {
-            getFacebookId(parseUser);
-        } else {
-            e.printStackTrace();
-        }
+        afterSigIn(e);
     }
 
     void getFacebookId(final ParseUser parseUser) {
@@ -165,9 +170,31 @@ public class LoginActivity extends OTActionBarActivity {
         request.executeAsync();
     }
 
+    void createOtEventList() {
+        ParseUser parseUser = ParseUser.getCurrentUser();
+        if (parseUser == null) {
+            FastToast.show("Cannot register this user", this);
+            return;
+        }
+        Log.d(TAG, "parse user is new");
+        OTEventList otEventList = new OTEventList();
+        otEventList.setUserId(parseUser.getObjectId());
+        otEventList.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e== null) {
+                    Log.d(TAG, "horray!");
+                } else {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
 
 
     void afterSigIn(ParseException e) {
+        dismissBlockForApi();
         if (e == null) {
             startActivity(new Intent(this, MainActivity.class));
             finish();

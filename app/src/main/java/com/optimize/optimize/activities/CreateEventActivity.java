@@ -43,7 +43,11 @@ public class CreateEventActivity extends OTActionBarActivity implements RadioGro
     public BetterViewPager viewPager;
 
     int[] rbStepIds = { R.id.rb_step_1, R.id.rb_step_2, R.id.rb_step_3};
-    PagerAdapter pagerAdapter;
+    public PagerAdapter pagerAdapter;
+
+    public CreateEventDetailFragment createEventDetailFragment;
+    CreateEventParticipantFragment createEventParticipantFragment;
+    CreateEventTimeFragment createEventTimeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +99,7 @@ public class CreateEventActivity extends OTActionBarActivity implements RadioGro
         }
     }
 
-    private class StepPagerAdapter extends FragmentStatePagerAdapter {
+    public class StepPagerAdapter extends FragmentStatePagerAdapter {
 
         public StepPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -105,11 +109,20 @@ public class CreateEventActivity extends OTActionBarActivity implements RadioGro
         public Fragment getItem(int position) {
             switch(position) {
                 case 0:
-                    return new CreateEventTimeFragment();
+                    if (createEventTimeFragment == null) {
+                        createEventTimeFragment = new CreateEventTimeFragment();
+                    }
+                    return createEventTimeFragment;
                 case 1:
-                    return new CreateEventParticipantFragment();
+                    if (createEventParticipantFragment == null) {
+                        createEventParticipantFragment = new CreateEventParticipantFragment();
+                    }
+                    return createEventParticipantFragment;
                 case 2:
-                    return new CreateEventDetailFragment();
+                    if (createEventDetailFragment == null) {
+                        createEventDetailFragment = new CreateEventDetailFragment();
+                    }
+                    return createEventDetailFragment;
             }
             return null;
         }

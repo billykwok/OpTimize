@@ -29,5 +29,7 @@
     <string name="create_event_step_3">3</string>
     <string name="facebook_app_id">787427407999012</string>
     <string name="title_activity_test">TestActivity</string>
+    <string name="sign_in">Signing In...</string>
+    <string name="register">Registering...</string>
 
 </resources>

@@ -61,6 +61,6 @@ public class GetOptimumTimeSlotsTask extends AsyncTask<Void, Void , List<TimeSlo
         createEventActivity.dismissBlockForApi();
         createEventActivity.viewPager.setCurrentItem(2, true);
         createEventActivity.rgStep.check(R.id.rb_step_3);
-
+        createEventActivity.pagerAdapter.notifyDataSetChanged();
     }
 }

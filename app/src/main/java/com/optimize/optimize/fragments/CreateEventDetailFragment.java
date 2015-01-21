@@ -76,9 +76,12 @@ public class CreateEventDetailFragment extends OTFragment {
 
         possibleTimeSlot = getOTActionBarActivity().getPossibleTimeSlots();
 
-
-        adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_spinner_item, possibleTimeSlot);
+        Log.d(TAG, "running ... set adapter with timeslots no.: " + String.valueOf(possibleTimeSlot.size()));
+        ArrayAdapter<TimeSlot> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_spinner_item, possibleTimeSlot);
         spEventTimeSlot.setAdapter(adapter);
+
+        Log.d(TAG, "running ... set adapter ");
+
 
         return view;
     }
@@ -92,9 +95,11 @@ public class CreateEventDetailFragment extends OTFragment {
             for (TimeSlot t: getOTActionBarActivity().getPossibleTimeSlots()) {
                 Log.d(TAG, "on Create get possible time slots: " + t.toString());
             }
+            notifyTimeSlotChange();
         } else {
             Log.e(TAG, "on Create null possible time slots");
         }
+
     }
 
     @Override
@@ -104,9 +109,11 @@ public class CreateEventDetailFragment extends OTFragment {
             for (TimeSlot t: getOTActionBarActivity().getPossibleTimeSlots()) {
                 Log.d(TAG, " on start get possible time slots: " + t.toString());
             }
+            notifyTimeSlotChange();
         } else {
             Log.e(TAG, "on start null possible time slots");
         }
+
     }
 
     @Override
@@ -116,16 +123,17 @@ public class CreateEventDetailFragment extends OTFragment {
             for (TimeSlot t: getOTActionBarActivity().getPossibleTimeSlots()) {
                 Log.d(TAG, " get possible time slots: " + t.toString());
             }
+            notifyTimeSlotChange();
         } else {
             Log.e(TAG, " null possible time slots");
         }
+
     }
 
     public void notifyTimeSlotChange() {
         if (possibleTimeSlot != null) {
             possibleTimeSlot.clear();
             possibleTimeSlot.addAll(getOTActionBarActivity().getPossibleTimeSlots());
-            adapter.notifyDataSetChanged();
         }
     }
 
