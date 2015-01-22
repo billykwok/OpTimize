@@ -1,5 +1,6 @@
 package com.optimize.optimize.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +31,7 @@ public class EventListFragment extends BaseFragment {
     RecyclerView.Adapter rvAdapterOTEvent;
     RecyclerView.LayoutManager rvLayoutMangerOTEvent;
     ParseUser current;
+    List<OTEvent> otEvents;
     final String TAG = "EventListFragment";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,18 +47,32 @@ public class EventListFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         rvLayoutMangerOTEvent = new LinearLayoutManager(getActivity());
         rvOTEvent.setLayoutManager(rvLayoutMangerOTEvent);
-
-        rvAdapterOTEvent = new OTEventAdapter(getOtEvent());
+        otEvents = getOtEvent();
+        rvAdapterOTEvent = new OTEventAdapter(otEvents);
         rvOTEvent.setAdapter(rvAdapterOTEvent);
 
         super.onViewCreated(view, savedInstanceState);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (otEvents != null) {
+            Log.d(TAG, "otevents is not null");
+            otEvents.clear();
+            otEvents.addAll(getOtEvent());
+            rvAdapterOTEvent.notifyDataSetChanged();
+        } else {
+            Log.d(TAG, "otevnts is null");
+        }
+    }
+
     private List<OTEvent> getOtEvent() {
         ParseQuery<OTEvent> otEventParseQuery = ParseQuery.getQuery(OTEvent.class);
         List<OTEvent> otEvents = null;
         try {
 
-            otEvents = otEventParseQuery.whereEqualTo("hostId", current.getObjectId()).find();
+            otEvents = otEventParseQuery.whereEqualTo("hostId", current.getObjectId()).orderByDescending("updatedAt").find();
 
         } catch (ParseException e) {
             e.printStackTrace();

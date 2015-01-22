@@ -1,6 +1,7 @@
 package com.optimize.optimize.fragments;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ import org.json.JSONArray;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -136,64 +138,55 @@ public class CreateEventDetailFragment extends OTFragment {
 
     @OnClick(R.id.btn_create_event)
     public void btnClickCreateEvent() {
-        FastToast.show("Create event", getActivity());
 
-        String name = etEventName.getText().toString();
-        String location = "To be confirmed...";
-        String description = etEventDesc.getText().toString();
-        String time = spEventTimeSlot.getSelectedItem().toString();
-
-        TimeSlot timeSlot = (TimeSlot) spEventTimeSlot.getSelectedItem();
-        Log.i("Results", "Title: " + name + "Des: " + description + "Time: " + time);
-
-
-        ParseUser current = ParseUser.getCurrentUser();
-
-        if(current != null) {
-            final OTEvent otEvent = new OTEvent(name, timeSlot.getStart(), timeSlot.getEnd(), location, description);
-            otEvent.setHostId(current.getObjectId());
-            otEvent.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if (e == null) {
-//                        List<ParseUser> users = getOTActionBarActivity().getParseUsers();
-//                        String otEventId = otEvent.getObjectId();
-                          //TODO Implement adding otEventsId to other users
-//                        Log.i("Test1","Reach");
-//                        for (ParseUser parseUser : users) {
-//                            JSONArray otEventIdList = parseUser.getJSONArray("otEventsId");
-//                            otEventIdList.put(otEventId);
-//                            parseUser.put("otEventsId", otEventIdList);
-//                            parseUser.saveInBackground(new SaveCallback() {
-//                                @Override
-//                                public void done(ParseException e) {
-//                                    if (e == null) {
-//                                        FastToast.show("save success", getApplicationContext());
-//                                    }
-//                                }
-//                            });
-//                        }
-//                        List<Participant> participantList = Participant.fromParseUsers(users);
-//                        otEvent.setParticipants(participantList);
-                    }
-                }
-            });
-        }
-
-        CalendarService.exportEvent(getBaseContext(),
-                new CalendarEvent(name,
-                        timeSlot.getStart(),
-                        timeSlot.getEnd()),
-                description,
-                location,
-                CalendarService.getCalendarId(getBaseContext()));
-        FastToast.show("Event exported to Calendar", getApplicationContext());
-        finishActivity();
+        getOTActionBarActivity().blockForApi("Creating Event...");
+        new CreateEventTask().execute();
     }
 
     @OnClick(R.id.btn_cancel)
     public void btnClickCancel() {
         finishActivity();
+    }
+
+    class CreateEventTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            String name = etEventName.getText().toString();
+            String location = "To be confirmed...";
+            String description = etEventDesc.getText().toString();
+            String time = spEventTimeSlot.getSelectedItem().toString();
+
+            TimeSlot timeSlot = (TimeSlot) spEventTimeSlot.getSelectedItem();
+            Log.i("Results", "Title: " + name + "Des: " + description + "Time: " + time);
+
+
+            ParseUser current = ParseUser.getCurrentUser();
+
+            if(current != null) {
+                final OTEvent otEvent = new OTEvent(name, timeSlot.getStart(), timeSlot.getEnd(), location, description);
+                otEvent.setHostId(current.getObjectId());
+                otEvent.saveInBackground();
+            }
+            CalendarService.exportEvent(getBaseContext(),
+                    new CalendarEvent(name,
+                            timeSlot.getStart(),
+                            timeSlot.getEnd()),
+                    description,
+                    location,
+                    CalendarService.getCalendarId(getBaseContext()));
+
+            getOTActionBarActivity().dismissBlockForApi();
+            getOTActionBarActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    FastToast.show("Event exported to Calendar", getApplicationContext());
+                }
+            });
+            finishActivity();
+            return null;
+        }
     }
 
 }
