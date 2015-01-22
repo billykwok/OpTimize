@@ -48,7 +48,11 @@ public class MainActivity extends OTActionBarActivity {
     MaterialMenuDrawable btnMaterialMenu;
     boolean isDrawerOpened;
 
-    ParseUser sample_user4;
+    ParseUser billy;
+    ParseUser mary;
+    ParseUser jamesCheung;
+    ParseUser sam2;
+    ParseUser ginger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +115,6 @@ public class MainActivity extends OTActionBarActivity {
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FastToast.show("Hi", MainActivity.this);
                 startActivity(CreateEventActivity.class);
             }
         });
@@ -123,7 +126,7 @@ public class MainActivity extends OTActionBarActivity {
 
         new GetCalendarEventTask().execute(this);
 
-        // Test Event
+        //testCase();
         // testMe();
     }
 
@@ -146,49 +149,26 @@ public class MainActivity extends OTActionBarActivity {
 
 
     private void testCase(){
-        final List<CalendarEvent> celist2 = new ArrayList<CalendarEvent>();
-        celist2.add(CalendarService.createEvent("sample_event", 2015, 1, 22, 9, 30, 2015, 1, 5, 10, 20));
+//        final List<CalendarEvent> celist1 = new ArrayList<CalendarEvent>();
+//        celist1.add(CalendarService.createEvent("ISOM1380", 2015, 2, 2, 9, 0,      2015, 2, 2, 12, 0));
+//        celist1.add(CalendarService.createEvent("Tutorial", 2015, 2, 2, 13, 30,    2015, 2, 2, 15, 30));
+//        celist1.add(CalendarService.createEvent("Meeting",  2015, 2, 2, 3, 0,     2015, 2, 2, 5, 0));
+//        celist1.add(CalendarService.createEvent("ISOM1380", 2015, 2, 3, 9, 0,      2015, 2, 3, 12, 0));
+//        celist1.add(CalendarService.createEvent("Tutorial", 2015, 2, 3, 13, 30,     2015, 2, 3, 15, 30));
+//        celist1.add(CalendarService.createEvent("Tutorial", 2015, 2, 4, 9, 30,      2015, 2, 4, 11, 30));
+//        celist1.add(CalendarService.createEvent("Piano",    2015, 2, 4, 12, 00,     2015, 2, 4, 13, 00));
+//        celist1.add(CalendarService.createEvent("Tutorial", 2015, 2, 4, 13, 30,     2015, 2, 4, 15, 30));
+//        celist1.add(CalendarService.createEvent("ISOM1380", 2015, 2, 5, 13, 30,     2015, 2, 5, 15, 30));
 
+        //ginger.signUpInBackground(null);
 
-        sample_user4 = new ParseUser();
-
-        OTUserService.setEventList(celist2, sample_user4);
-        sample_user4.setUsername("sample_user_name4");
-        sample_user4.setPassword("sample_password4");
-        sample_user4.setEmail("sample_user4@gmail.com");
-        String id = null;
-
-//        sample_user4.signUpInBackground(new SignUpCallback() {
-//            @Override
-//            public void done(com.parse.ParseException e) {
-//                if (e != null) {
-//                    sample_user4 = ParseUser.getCurrentUser();
-//                    testCaseAddIdToEvent(celist2);
-//                } else {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//        });
-
-
-//        sample_user4.saveInBackground(new SaveCallback() {
-//            @Override
-//            public void done(com.parse.ParseException e) {
-//                if (e == null) {
-//                    FastToast.show("save success", MainActivity.this);
-//                } else {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
     }
 
     public void testCaseAddIdToEvent(List<CalendarEvent> celist2) {
         for(CalendarEvent ce : celist2){
             OTEvent otEvent = new OTEvent(ce.getTitle(), ce.getBegin(), ce.getEnd(), "My home", "Description sample");
-            Log.i("Test", sample_user4.getObjectId());
-            otEvent.setHostId(sample_user4.getObjectId());
+//            Log.i("Test", sample_user4.getObjectId());
+//            otEvent.setHostId(sample_user4.getObjectId());
             otEvent.saveInBackground(null);
         }
     }
